@@ -4,13 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-@TeleOp(name="ExtendoTestOP", group="Test OP")
-public class ExtendoTestOP extends LinearOpMode {
+@TeleOp(name="WristTestOp", group="Test OP")
+public class WristTestOP extends LinearOpMode {
 
-    public ExtendoTest extendoTest = new ExtendoTest();
-
+    public WristTest wristTest = new WristTest();
     public Gamepad gp1;
     public Gamepad gp2;
+
 
     @Override
     public void waitForStart() {
@@ -19,8 +19,9 @@ public class ExtendoTestOP extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        wristTest.init(hardwareMap);
 
-        extendoTest.init(hardwareMap);
+        waitForStart();
 
         gp1 = gamepad1;
         gp2 = gamepad2;
@@ -28,8 +29,9 @@ public class ExtendoTestOP extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive() && !isStopRequested()) {
-            extendoTest.Loop(gp1, gp2);
-            telemetry.addData("extendoPos", extendoTest.extendoPos());
+            wristTest.Loop(gp1, gp2);
+
+            telemetry.addData("wrist.currentPosition", "%.3f", wristTest.currentPosition());
             telemetry.update();
         }
     }

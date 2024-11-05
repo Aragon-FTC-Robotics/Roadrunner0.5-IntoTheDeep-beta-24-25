@@ -3,7 +3,8 @@ package org.firstinspires.ftc.teamcode.TestOP;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-public class Intake {
+
+public class IntakeTest {
     Servo intakeServo;
 
     double pos;

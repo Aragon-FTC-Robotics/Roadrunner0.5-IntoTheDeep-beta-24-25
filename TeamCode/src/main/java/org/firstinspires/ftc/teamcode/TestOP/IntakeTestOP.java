@@ -7,10 +7,9 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @TeleOp(name="IntakeTestOP", group="Test OP")
 public class IntakeTestOP extends LinearOpMode {
 
-    public Intake intakeTest = new Intake();
+    public IntakeTest intakeTest = new IntakeTest();
     public Gamepad gp1;
     public Gamepad gp2;
-
 
     @Override
     public void waitForStart() {

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @TeleOp(name="VertSlidesTestOp", group="Test OP")
 public class SlidesTestOP extends LinearOpMode {
 
-    public Slides slidesTest = new Slides();
+    public SlidesTest slidesTest = new SlidesTest();
 
     public Gamepad gp1;
     public Gamepad gp2;

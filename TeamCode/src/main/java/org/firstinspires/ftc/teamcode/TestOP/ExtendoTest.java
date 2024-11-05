@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-public class Extendo {
+public class ExtendoTest {
 
     //horizontal slides, wrist (servo), flywheels
     // vert slides, bar (motor), claw (servo), wrist (servo)
