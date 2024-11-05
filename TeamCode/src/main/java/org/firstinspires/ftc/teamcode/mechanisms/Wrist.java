@@ -24,7 +24,7 @@ public class Wrist {
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (!(gp1.a&&(gp1.dpad_up||gp2.dpad_right)&&gp2.b)){
-            defPos += (gp1.left_trigger - gp1.right_trigger) * speed;
+            defPos += (gp2.left_trigger - gp2.right_trigger) * speed;
             if (defPos > 1) {
                 defPos = 1;
             } else if (defPos < 0) {
