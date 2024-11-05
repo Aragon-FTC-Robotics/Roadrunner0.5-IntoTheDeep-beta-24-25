@@ -18,9 +18,11 @@ public class Bar {
     double bucketpos = 0;
     double clipuppos = 0;
     double clipdownpos = 0;
+
     BarState currentBarState;
     public void init(HardwareMap hm) {
         barServo = hm.get(Servo.class, "bar");
+//        barServo.setDirection(Servo.Direction.REVERSE);
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (gp1.a) { //ALL OF THESE ARE PLACEHOLDERS type baet

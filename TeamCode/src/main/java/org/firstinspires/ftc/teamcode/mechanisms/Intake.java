@@ -12,9 +12,9 @@ public class Intake {
         flywheel = hm.get(DcMotor.class, "flywheel");
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp1.a) {
+        if (gp1.right_bumper) {
             currentIntakeState = IntakeDirection.IN;
-        } else if (gp1.b){
+        } else if (gp1.left_bumper){
             currentIntakeState = IntakeDirection.OUT;
         } else {
             currentIntakeState = IntakeDirection.STOP;
