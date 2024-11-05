@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Intake {
     DcMotor flywheel;
     enum IntakeDirection {IN, OUT, STOP};
-    IntakeDirection currentIntakeState = IntakeDirection.IN;
+    IntakeDirection currentIntakeState = IntakeDirection.STOP;
     public void init(HardwareMap hm) {
         flywheel = hm.get(DcMotor.class, "flywheel");
     }
