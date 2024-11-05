@@ -12,21 +12,23 @@ public class ExtendoTest {
 
     Gamepad gp;
     DcMotor extendo;
-    int sPos;
+    int ePos;
 
     public void init(HardwareMap hm) {
         extendo = hm.get(DcMotor.class, "extendo");
-        sPos = 0;
+        ePos = 0;
         extendo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (gp2.dpad_up) {
-            sPos += 10;
+            ePos = extendo.getCurrentPosition() + 10;
         } else if (gp2.dpad_down) {
-            sPos -= 10;
+            ePos = extendo.getCurrentPosition() - 10;
+        } else {
+            ePos = extendo.getCurrentPosition();
         }
-        moveToPos(sPos);
+        moveToPos(ePos);
     }
 
     private void moveToPos(int position) {
@@ -36,6 +38,6 @@ public class ExtendoTest {
     }
 
     public int extendoPos() {
-        return sPos;
+        return ePos;
     }
 }

@@ -30,7 +30,7 @@ public class IntakeTestOP extends LinearOpMode {
         while(opModeIsActive() && !isStopRequested()) {
             intakeTest.Loop(gp1, gp2);
 
-            telemetry.addData("wrist.currentPosition", "%.3f", intakeTest.intakePos());
+            telemetry.addData("intake.pos", "%.3f", intakeTest.intakePos());
             telemetry.update();
         }
     }

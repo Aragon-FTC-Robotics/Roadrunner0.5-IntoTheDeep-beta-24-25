@@ -4,11 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-@TeleOp(name="ExtendoTestOP", group="Test OP")
-public class ExtendoTestOP extends LinearOpMode {
+@TeleOp(name="BarTest", group="Test OP")
+public class BarTestOP extends LinearOpMode {
 
-    public ExtendoTest extendoTest = new ExtendoTest();
-
+    public BarTest barTest = new BarTest();
     public Gamepad gp1;
     public Gamepad gp2;
 
@@ -20,7 +19,7 @@ public class ExtendoTestOP extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        extendoTest.init(hardwareMap);
+        barTest.init(hardwareMap);
 
         gp1 = gamepad1;
         gp2 = gamepad2;
@@ -28,9 +27,12 @@ public class ExtendoTestOP extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive() && !isStopRequested()) {
-            extendoTest.Loop(gp1, gp2);
-            telemetry.addData("extendo.pos", extendoTest.extendoPos());
-            telemetry.update();
+
+            barTest.Loop(gp1, gp2);
+            telemetry.addData("rightBar.value", barTest.rightPos());
+            telemetry.addData("leftBar.value", barTest.leftPos());
+            telemetry.addLine();
+
         }
     }
 }
