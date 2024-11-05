@@ -29,6 +29,9 @@ public class Intake {
             case STOP:
                 flywheel.setPower(0);
                 break;
+            default:
+                flywheel.setPower(0);
+                break;
         }
     }
 }
