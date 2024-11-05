@@ -31,7 +31,7 @@ public class WristTestOP extends LinearOpMode {
         while(opModeIsActive() && !isStopRequested()) {
             wristTest.Loop(gp1, gp2);
 
-            telemetry.addData("wrist.currentPosition", "%.3f", wristTest.currentPosition());
+            telemetry.addData("wrist.pos", "%.3f", wristTest.currentPosition());
             telemetry.update();
         }
     }

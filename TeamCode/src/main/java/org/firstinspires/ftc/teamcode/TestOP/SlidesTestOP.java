@@ -29,8 +29,8 @@ public class SlidesTestOP extends LinearOpMode {
 
         while(opModeIsActive() && !isStopRequested()) {
             slidesTest.Loop(gp1, gp2);
-            telemetry.addData("vertslideleftpos", slidesTest.leftPos());
-            telemetry.addData("vertsliderightpos", slidesTest.rightPos());
+            telemetry.addData("slideLeft.pos", slidesTest.leftPos());
+            telemetry.addData("slideRight.pos", slidesTest.rightPos());
             telemetry.update();
         }
     }

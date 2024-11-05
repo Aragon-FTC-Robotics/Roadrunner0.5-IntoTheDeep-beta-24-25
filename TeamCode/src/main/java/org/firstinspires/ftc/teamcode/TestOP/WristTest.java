@@ -9,16 +9,16 @@ public class WristTest {
     double pos;
 
     public void init(HardwareMap hm) {
-        wristServo = hm.get(Servo.class, "wristServo");
+        wristServo = hm.get(Servo.class, "wrist");
         pos = 0.32;
     }
+
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (gp1.dpad_left) {
             pos += 0.001;
         } else if (gp1.dpad_right) {
             pos -= 0.001;
         }
-
         wristServo.setPosition(pos);
     }
 
