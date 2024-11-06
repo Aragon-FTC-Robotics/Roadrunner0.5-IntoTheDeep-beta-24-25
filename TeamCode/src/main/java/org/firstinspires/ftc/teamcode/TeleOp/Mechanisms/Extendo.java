@@ -34,10 +34,11 @@ public class Extendo {
         if (pos<min) {
             pos=min;
         }
-        extendoMotor.setTargetPosition(pos);
+        int intpos = (int) Math.round(pos);
+        extendoMotor.setTargetPosition(intpos);
     }
 
-    public int getPos() {
+    public double getPos() {
         return pos;
     }
 }
