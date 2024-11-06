@@ -32,8 +32,25 @@ public class FullTestTeleOP extends LinearOpMode {
         slidesTest.init(hardwareMap);
         wristTest.init(hardwareMap);
 
+        gp1 = gamepad1;
+        gp2 = gamepad2;
+
+        waitForStart();
+
+        while(opModeIsActive() && !isStopRequested()) {
+
+            barTest.Loop(gp1, gp2);
+            telemetry.addData("rightBar.value", barTest.getrightPos());
+            telemetry.addData("leftBar.value", barTest.getleftPos());
+            telemetry.addData("claw.value", clawTest.getcPos());
+            telemetry.addData("extendo.value", extendoTest.getePos());
+            telemetry.addData("intake.value", intakeTest.getiPos());
+            telemetry.addData("leftslides.value", slidesTest.getleftPos());
+            telemetry.addData("rightslides.value", slidesTest.getrightPos());
+            telemetry.addData("wrist.value", wristTest.getwPos());
+            telemetry.addLine();
+
+        }
 
     }
-
-
 }

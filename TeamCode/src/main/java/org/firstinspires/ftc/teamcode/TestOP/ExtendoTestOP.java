@@ -29,7 +29,7 @@ public class ExtendoTestOP extends LinearOpMode {
 
         while(opModeIsActive() && !isStopRequested()) {
             extendoTest.Loop(gp1, gp2);
-            telemetry.addData("extendo.pos", extendoTest.extendoPos());
+            telemetry.addData("extendo.pos", extendoTest.getePos());
             telemetry.update();
         }
     }
