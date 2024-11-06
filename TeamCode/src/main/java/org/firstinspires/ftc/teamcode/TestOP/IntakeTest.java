@@ -23,7 +23,7 @@ public class IntakeTest {
         intakeServo.setPosition(iPos);
     }
 
-    public double intakePos() {
+    public double getiPos() {
         return iPos;
     }
 }

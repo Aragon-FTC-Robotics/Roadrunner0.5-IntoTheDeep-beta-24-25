@@ -22,7 +22,7 @@ public class WristTest {
         wristServo.setPosition(pos);
     }
 
-    public double currentPosition() {
+    public double getwPos() {
         return pos;
     }
 }

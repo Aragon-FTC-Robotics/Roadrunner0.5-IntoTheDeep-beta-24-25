@@ -33,10 +33,10 @@ public class BarTest {
         barRight.setPosition(bPos);
     }
 
-    public int leftPos() {
+    public int getleftPos() {
         return bPos;
     }
-    public int rightPos() {
+    public int getrightPos() {
         return bPos;
     }
 }

@@ -44,11 +44,11 @@ public class SlidesTest {
         slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public int leftPos() {
+    public int getleftPos() {
         return sPos;
     }
 
-    public int rightPos() {
+    public int getrightPos() {
         return sPos;
     }
 }

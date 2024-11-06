@@ -29,8 +29,8 @@ public class BarTestOP extends LinearOpMode {
         while(opModeIsActive() && !isStopRequested()) {
 
             barTest.Loop(gp1, gp2);
-            telemetry.addData("rightBar.value", barTest.rightPos());
-            telemetry.addData("leftBar.value", barTest.leftPos());
+            telemetry.addData("rightBar.value", barTest.getrightPos());
+            telemetry.addData("leftBar.value", barTest.getleftPos());
             telemetry.addLine();
 
         }

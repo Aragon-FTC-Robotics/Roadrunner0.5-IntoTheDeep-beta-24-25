@@ -37,7 +37,7 @@ public class ExtendoTest {
         extendo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public int extendoPos() {
+    public int getePos() {
         return ePos;
     }
 }
