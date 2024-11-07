@@ -21,9 +21,9 @@ public class ExtendoTest {
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp2.dpad_up) {
+        if (gp2.dpad_left) {
             ePos = extendo.getCurrentPosition() + 10;
-        } else if (gp2.dpad_down) {
+        } else if (gp2.dpad_right) {
             ePos = extendo.getCurrentPosition() - 10;
         } else {
             ePos = extendo.getCurrentPosition();
