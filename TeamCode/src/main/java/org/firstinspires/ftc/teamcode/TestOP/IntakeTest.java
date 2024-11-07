@@ -14,9 +14,9 @@ public class IntakeTest {
         iPos = 0.32;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp1.dpad_left) {
+        if (gp1.y) {
             iPos += 0.001;
-        } else if (gp1.dpad_right) {
+        } else if (gp1.b) {
             iPos -= 0.001;
         }
 

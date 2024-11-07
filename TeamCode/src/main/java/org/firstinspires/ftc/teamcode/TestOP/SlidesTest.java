@@ -25,7 +25,7 @@ public class SlidesTest {
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp2.dpad_up) {
+        if (gp1.dpad_up) {
             sPos = slideLeft.getCurrentPosition() + 10;
         } else if (gp2.dpad_down) {
             sPos = slideLeft.getCurrentPosition() - 10;
