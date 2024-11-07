@@ -7,21 +7,21 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
 public class Drivetrain {
-    DcMotor frontRight;
-    DcMotor frontLeft;
-    DcMotor backRight;
-    DcMotor backLeft;
+    DcMotor rightFront;
+    DcMotor leftFront;
+    DcMotor rightRear;
+    DcMotor leftRear;
     double minSpeed = -0.8;
     double maxSpeed = 0.8;
 
     boolean slowMode = false;
     public void init(HardwareMap hm){
-        frontRight = hm.get(DcMotor.class, "rightFront");
-        frontLeft = hm.get(DcMotor.class, "leftFront");
-        backRight = hm.get(DcMotor.class, "rightBack");
-        backLeft = hm.get(DcMotor.class, "leftBack");
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront = hm.get(DcMotor.class, "rightFront");
+        leftFront = hm.get(DcMotor.class, "leftFront");
+        rightRear = hm.get(DcMotor.class, "rightRear");
+        leftRear = hm.get(DcMotor.class, "leftRear");
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void slowModeON(){
@@ -62,9 +62,9 @@ public class Drivetrain {
             slowModeOFF();
         }
 
-        frontRight.setPower(Range.clip(frontRightPower, minSpeed, maxSpeed));
-        backRight.setPower(Range.clip(backRightPower, minSpeed, maxSpeed));
-        frontLeft.setPower(Range.clip(frontLeftPower, minSpeed, maxSpeed));
-        backLeft.setPower(Range.clip(backLeftPower, minSpeed, maxSpeed));
+        rightFront.setPower(Range.clip(frontRightPower, minSpeed, maxSpeed));
+        rightRear.setPower(Range.clip(backRightPower, minSpeed, maxSpeed));
+        leftFront.setPower(Range.clip(frontLeftPower, minSpeed, maxSpeed));
+        leftRear.setPower(Range.clip(backLeftPower, minSpeed, maxSpeed));
     }
 }
