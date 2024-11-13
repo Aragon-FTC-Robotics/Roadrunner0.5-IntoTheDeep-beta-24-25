@@ -22,7 +22,7 @@ public class Extendo {
         pos = 0;
     }
 
-    public void loop(Gamepad gp1, Gamepad gp2) {
+    public void Loop(Gamepad gp1, Gamepad gp2) {
 //        pos += (speed*gp2.right_stick_y);
 
 //        if(gp2.touchpad_finger_1){pos = (gp2.touchpad_finger_1_x*((max+min)/2)+((max+min/2)));}

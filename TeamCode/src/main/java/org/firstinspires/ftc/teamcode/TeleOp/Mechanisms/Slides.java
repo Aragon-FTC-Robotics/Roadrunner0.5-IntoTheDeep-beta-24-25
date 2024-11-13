@@ -29,7 +29,7 @@ public class Slides {
         slideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public void loop(Gamepad gp1, Gamepad gp2) {
+    public void Loop(Gamepad gp1, Gamepad gp2) {
         if(gp2.dpad_down) {
             setState(slideState.GROUND);
         } else if(gp2.dpad_right) {
