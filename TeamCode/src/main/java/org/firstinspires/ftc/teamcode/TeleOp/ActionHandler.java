@@ -34,6 +34,11 @@ public class ActionHandler {
             //Color sensor :fire:
         }
 
+        //Transfer: extendo min, wait, intake wrist in, , wait, claw open
+        //High Bucket: slides up, bar back, wrist mid, claw close
+        // ??? clip: slides down, wait, claw open
+        //Wall pick-up: bar mid, wrist mid, claw open
+        //
 
     }
 }
