@@ -16,7 +16,7 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(90), 15)
                 .followTrajectorySequence(drive -> drive.trajectorySequenceBuilder(new Pose2d(-23.5, -60, Math.toRadians(90)))
                         //slides to upclippos
-                        .lineToConstantHeading(new Vector2d(-5, -39))
+                        .lineToConstantHeading(new Vector2d(-5, -39)) // To clipping bar
                         //slides to downclippos
                         //open claw
                         //
@@ -24,20 +24,23 @@ public class MeepMeepTesting {
 //                        .splineToConstantHeading(new Vector2d(-48, -50),Math.PI/2)
 //                        .splineToConstantHeading(new Vector2d(-58, -44),180)
 //                        .strafeTo(new Vector2d(-58, -44))
-                        .lineToLinearHeading(new Pose2d(-58, -44, Math.toRadians(66)))
+                        .setTangent(Math.toRadians(220))
+                        .splineToSplineHeading(new Pose2d(-58, -44, Math.toRadians(66)), Math.toRadians(170)) //to bucket facing r neutral
                         //extendo
                         //intake and extendo back
                         //claw pickup from intake
                         //slides up and drop bucket
                         //slides down and bar reset pos
                         .waitSeconds(1)
-                        .lineToLinearHeading(new Pose2d(-59.5, -44, Math.toRadians(87.5)))
+                        .lineToLinearHeading(new Pose2d(-59.5, -44, Math.toRadians(87.5))) //facing c neutral
                         //do it again
                         .waitSeconds(1)
-                        .splineToSplineHeading(new Pose2d(-50,-40, Math.toRadians(135)),Math.toRadians(0))
+                        .setTangent(Math.toRadians(45))
+                        .splineToSplineHeading(new Pose2d(-50,-40, Math.toRadians(135)),Math.toRadians(0)) //to middleofnowhere facing l neutral
                         .waitSeconds(1)
                         //again
-                        .splineToSplineHeading(new Pose2d(-55,-47, Math.toRadians(55)),Math.toRadians(0))
+                        .setTangent(Math.toRadians(135))
+                        .splineToSplineHeading(new Pose2d(-55,-47, Math.toRadians(55)),Math.toRadians(45)) //to bucket
                         .waitSeconds(5)
                         .build());
 
