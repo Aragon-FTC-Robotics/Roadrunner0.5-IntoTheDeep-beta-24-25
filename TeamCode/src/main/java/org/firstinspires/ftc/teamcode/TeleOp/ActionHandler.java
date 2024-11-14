@@ -9,6 +9,8 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Extendo;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
+import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Claw;
+
 
 public class ActionHandler {
     public Slides slides;
@@ -17,6 +19,7 @@ public class ActionHandler {
     public Bar bar;
     public Wrist wrist;
     public Intake intake;
+    public Claw claw;
 
     public void init(HardwareMap hwMap){
         slides.init(hwMap);
@@ -25,9 +28,10 @@ public class ActionHandler {
         bar.init(hwMap);
         wrist.init(hwMap);
         intake.init(hwMap);
+        claw.init(hwMap);
     }
 
-    public void loop(Gamepad gp1, Gamepad gp2) {
+    public void loop(Gamepad gp1, Gamepad gp2) throws InterruptedException {
         //Intake action, runs intake + color sensor check
         if(gp1.right_bumper) {
             intake.setState(Intake.IntakeDirection.IN);
