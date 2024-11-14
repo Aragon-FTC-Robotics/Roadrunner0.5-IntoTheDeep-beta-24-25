@@ -38,7 +38,9 @@ public class Extendo {
         extendoMotor.setTargetPosition(intpos);
     }
 
-
+    public void extendoIn() {
+        pos = min;
+    }
 
     public double getPos() {
         return pos;
