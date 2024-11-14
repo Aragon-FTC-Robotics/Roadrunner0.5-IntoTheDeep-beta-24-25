@@ -38,6 +38,8 @@ public class Extendo {
         extendoMotor.setTargetPosition(intpos);
     }
 
+
+
     public double getPos() {
         return pos;
     }
