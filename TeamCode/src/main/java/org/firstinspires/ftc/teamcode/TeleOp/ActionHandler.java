@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Bar;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Drivetrain;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Extendo;
-import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Claw;
@@ -18,7 +18,7 @@ public class ActionHandler {
     public Extendo extendo;
     public Bar bar;
     public Wrist wrist;
-    public Intake intake;
+    public Flywheel flywheel;
     public Claw claw;
 
     public void init(HardwareMap hwMap){
@@ -27,14 +27,14 @@ public class ActionHandler {
         extendo.init(hwMap);
         bar.init(hwMap);
         wrist.init(hwMap);
-        intake.init(hwMap);
+        flywheel.init(hwMap);
         claw.init(hwMap);
     }
 
     public void loop(Gamepad gp1, Gamepad gp2) throws InterruptedException {
         //Intake action, runs intake + color sensor check
         if(gp1.right_bumper) {
-            intake.setState(Intake.IntakeDirection.IN);
+            flywheel.setState(Flywheel.FlywheelDirection.IN);
             //Color sensor :fire:
         }
 

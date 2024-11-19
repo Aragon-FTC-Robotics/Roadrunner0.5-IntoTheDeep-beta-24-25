@@ -4,22 +4,22 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Intake {
+public class Flywheel {
     DcMotor flywheel;
-    public enum IntakeDirection {IN, OUT, STOP};
-    IntakeDirection currentIntakeState = IntakeDirection.STOP;
+    public enum FlywheelDirection {IN, OUT, STOP};
+    FlywheelDirection currentFlywheelState = FlywheelDirection.STOP;
     public void init(HardwareMap hm) {
         flywheel = hm.get(DcMotor.class, "flywheel");
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (gp1.right_bumper) {
-            currentIntakeState = IntakeDirection.IN;
+            currentFlywheelState = FlywheelDirection.IN;
         } else if (gp1.left_bumper){
-            currentIntakeState = IntakeDirection.OUT;
+            currentFlywheelState = FlywheelDirection.OUT;
         } else {
-            currentIntakeState = IntakeDirection.STOP;
+            currentFlywheelState = FlywheelDirection.STOP;
         }
-        switch (currentIntakeState) {
+        switch (currentFlywheelState) {
             case IN:
                 flywheel.setPower(0.8);
                 break;
@@ -35,7 +35,7 @@ public class Intake {
         }
     }
 
-    public void setState(IntakeDirection state) {
-        currentIntakeState = state;
+    public void setState(FlywheelDirection state) {
+        currentFlywheelState = state;
     }
 }
