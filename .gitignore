@@ -79,3 +79,9 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+MeepMeep/build.gradle
+MeepMeep/src/main/java/com/example/meepmeep/MeepMeepTesting.java
+MeepMeepTesting/build.gradle
+MeepMeepTesting/src/main/java/com/example/meepmeeptesting/MeepMeepTesting.java
+MeepMeepTesting/src/main/java/com/example/meepmeeptesting/merpmerp1plus2.java
+settings.gradle
