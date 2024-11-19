@@ -17,7 +17,7 @@ public class Auto_left_3_1 extends LinearOpMode {
     final double IWRISTTRANSFER = 0;
     final int EXTENDOIN = 0;
     final int EXTENDOMED = 400;
-    final double BARPOS = 0;
+    final double BARPOSREGULAR = 0;
     final double BARPOSCLIP = 0;
     final int SLIDESLOW = 0;
     final int SLIDESHIGH = 0;
@@ -76,7 +76,9 @@ public class Auto_left_3_1 extends LinearOpMode {
                 .waitSeconds(1)
                 .addTemporalMarker(() -> {claw.setPosition(CLAWOPEN);})
                 .waitSeconds(0.1)
-                .addTemporalMarker(() -> {wrist.setPosition(WRISTLEVEL);slides1.setTargetPosition(SLIDESLOW);slides2.setTargetPosition(SLIDESLOW);})
+                .addTemporalMarker(() -> {wrist.setPosition(WRISTLEVEL);slides1.setTargetPosition(SLIDESLOW);slides2.setTargetPosition(SLIDESLOW);bar1.setPosition(BARPOSREGULAR);})
+                .waitSeconds(1.5)
+                .addTemporalMarker(() -> {})
                 .build();
         waitForStart();
 

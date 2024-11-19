@@ -84,6 +84,7 @@ public class ActionHandler {
     }
 
     public void Transfer() {
+        
         bar.setState(Bar.BarState.TRANSFER);
         claw.setState(Claw.ClawState.OPEN);
     }
