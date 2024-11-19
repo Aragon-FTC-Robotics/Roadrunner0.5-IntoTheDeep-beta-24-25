@@ -11,7 +11,7 @@ public class Bar {
     Servo barServoLeft;
     Servo barServoRight;
 
-    enum BarState {TRANSFER, WALL, BUCKET, CLIPUP, CLIPDOWN}
+    public enum BarState {TRANSFER, WALL, BUCKET, CLIPUP, CLIPDOWN}
     double pos;
     double transferpos = 0;
     double wallpos = 0;
