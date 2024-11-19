@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Colorsensor;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Drivetrain;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Extendo;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Flywheel;
+import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.IntakeWrist;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
@@ -24,6 +25,7 @@ public class FullTeleop extends LinearOpMode {
     public Drivetrain drivetrain = new Drivetrain();
     public Extendo extendo = new Extendo();
     public Flywheel flywheel = new Flywheel();
+    public IntakeWrist intakeWrist = new IntakeWrist();
     public Wrist wrist = new Wrist();
 
     public Gamepad gp1;
@@ -42,6 +44,7 @@ public class FullTeleop extends LinearOpMode {
         drivetrain.init(hardwareMap);
         extendo.init(hardwareMap);
         flywheel.init(hardwareMap);
+        intakeWrist.init(hardwareMap);
         slides.init(hardwareMap);
         wrist.init(hardwareMap);
 
@@ -56,6 +59,7 @@ public class FullTeleop extends LinearOpMode {
             drivetrain.Loop(gp1, gp2);
             extendo.Loop(gp1, gp2);
             flywheel.Loop(gp1, gp2);
+            intakeWrist.Loop(gp1, gp2);
             slides.Loop(gp1, gp2);
             wrist.Loop(gp1, gp2);
         }
