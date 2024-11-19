@@ -12,6 +12,7 @@ public class FullTestTeleOP extends LinearOpMode {
     public ClawTest clawTest = new ClawTest();
     public ExtendoTest extendoTest = new ExtendoTest();
     public IntakeTest intakeTest = new IntakeTest();
+    public IntakeWristTest intakeWristTest = new IntakeWristTest();
     public SlidesTest slidesTest = new SlidesTest();
     public WristTest wristTest = new WristTest();
 
@@ -29,6 +30,7 @@ public class FullTestTeleOP extends LinearOpMode {
         clawTest.init(hardwareMap);
         extendoTest.init(hardwareMap);
         intakeTest.init(hardwareMap);
+        intakeWristTest.init(hardwareMap);
         slidesTest.init(hardwareMap);
         wristTest.init(hardwareMap);
 
@@ -45,6 +47,7 @@ public class FullTestTeleOP extends LinearOpMode {
             telemetry.addData("claw.value", clawTest.getcPos());
             telemetry.addData("extendo.value", extendoTest.getePos());
             telemetry.addData("intake.value", intakeTest.getiPos());
+            telemetry.addData("intakeWrist.value", intakeWristTest.getiwPos());
             telemetry.addData("leftslides.value", slidesTest.getleftPos());
             telemetry.addData("rightslides.value", slidesTest.getrightPos());
             telemetry.addData("wrist.value", wristTest.getwPos());
