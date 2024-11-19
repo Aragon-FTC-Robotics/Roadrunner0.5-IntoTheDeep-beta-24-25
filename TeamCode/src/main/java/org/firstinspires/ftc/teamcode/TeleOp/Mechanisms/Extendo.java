@@ -27,6 +27,12 @@ public class Extendo {
 
 //        if(gp2.touchpad_finger_1){pos = (gp2.touchpad_finger_1_x*((max+min)/2)+((max+min/2)));}
 
+        if (gp1.left_bumper){
+            pos = min;
+        } else if (gp1.right_bumper) {
+            pos = max;
+        }
+
         pos += (speed*(gp1.left_trigger - gp1.right_trigger));
         if (pos>max) {
             pos=max;
@@ -38,9 +44,6 @@ public class Extendo {
         extendoMotor.setTargetPosition(intpos);
     }
 
-    public void extendoIn() {
-        pos = min;
-    }
 
     public double getPos() {
         return pos;

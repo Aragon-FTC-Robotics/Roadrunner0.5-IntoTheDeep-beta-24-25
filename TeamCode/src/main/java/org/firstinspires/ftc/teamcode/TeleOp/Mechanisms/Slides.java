@@ -15,7 +15,7 @@ public class Slides {
     int medPos = 400;
     int highPos = 1200;
 
-    public enum slideState {GROUND, LOW, MED, HIGH}
+    public enum slideState {GROUND, CLIP, MED, HIGH}
 
     slideState currentSlideState = slideState.GROUND;
 
@@ -33,18 +33,18 @@ public class Slides {
         if(gp2.dpad_down) {
             setState(slideState.GROUND);
         } else if(gp2.dpad_right) {
-            setState(slideState.LOW);
+            setState(slideState.CLIP);
         } else if(gp2.dpad_up) {
-            setState(slideState.MED);
-        } else if(gp2.dpad_left) {
             setState(slideState.HIGH);
+        } else if(gp2.dpad_left) {
+            setState(slideState.MED);
         }
 
         switch(currentSlideState) {
             case GROUND:
                 slidePosition(0.8, groundPos);
                 break;
-            case LOW:
+            case CLIP:
                 slidePosition(0.8, lowPos);
                 break;
             case MED:

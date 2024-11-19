@@ -15,9 +15,9 @@ public class IntakeWrist {
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp1.y){
+        if (gp1.a){
             setCurrentiWrist(iwristState.IN);
-        } else if (gp1.x) {
+        } else if (gp1.y) {
             setCurrentiWrist(iwristState.OUT);
         }
 

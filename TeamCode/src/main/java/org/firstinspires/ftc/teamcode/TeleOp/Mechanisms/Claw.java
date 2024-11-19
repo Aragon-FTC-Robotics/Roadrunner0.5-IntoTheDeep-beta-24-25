@@ -13,9 +13,9 @@ public class Claw {
         currentClawState = ClawState.OPEN;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp1.left_bumper) {
+        if (gp2.left_bumper) {
             setState(ClawState.OPEN);
-        } else if (gp1.right_bumper) {
+        } else if (gp2.right_bumper) {
             setState(ClawState.CLOSE);
         }
         switch(currentClawState) {
