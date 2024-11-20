@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
     Servo claw1;
-    enum ClawState {CLOSE, OPEN}
+    public enum ClawState {CLOSE, OPEN}
     ClawState currentClawState;
     public void init(HardwareMap hm) {
         claw1 = hm.get(Servo.class, "claw1");
