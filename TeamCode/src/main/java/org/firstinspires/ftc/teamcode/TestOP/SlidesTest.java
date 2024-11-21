@@ -45,10 +45,10 @@ public class SlidesTest {
     }
 
     public int getleftPos() {
-        return sPos;
+        return slideLeft.getCurrentPosition();
     }
 
     public int getrightPos() {
-        return sPos;
+        return slideRight.getCurrentPosition();
     }
 }

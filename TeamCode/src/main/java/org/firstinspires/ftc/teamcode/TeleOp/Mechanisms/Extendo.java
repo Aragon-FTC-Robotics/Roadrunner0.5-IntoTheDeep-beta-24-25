@@ -11,7 +11,7 @@ public class Extendo {
 
     double pos;
     double speed = 5;
-    final int max = 1500;
+    final int max = 1500; //580 mm extendo
     final int min = 0;
     public void init(HardwareMap hm) {
         extendoMotor = hm.get(DcMotorEx.class, "extendo");
