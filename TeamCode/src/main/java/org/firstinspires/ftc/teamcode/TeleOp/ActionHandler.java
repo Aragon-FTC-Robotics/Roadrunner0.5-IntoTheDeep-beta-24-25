@@ -83,9 +83,9 @@ public class ActionHandler {
 
     }
 
-    public void Transfer() {
-        
+    public void Transfer() throws InterruptedException {
         bar.setState(Bar.BarState.TRANSFER);
+        wait(2000);
         claw.setState(Claw.ClawState.OPEN);
     }
 }
