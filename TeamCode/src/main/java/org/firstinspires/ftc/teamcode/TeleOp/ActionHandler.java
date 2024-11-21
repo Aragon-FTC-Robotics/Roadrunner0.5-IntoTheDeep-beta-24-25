@@ -37,7 +37,7 @@ public class ActionHandler {
         colorSensor.init(hwMap);
     }
 
-    public void loop(Gamepad gp1, Gamepad gp2) throws InterruptedException {
+    public void Loop(Gamepad gp1, Gamepad gp2) throws InterruptedException {
         //Intake action, runs intake + color sensor check
         if(gp1.right_bumper) {
             flywheel.setState(Flywheel.FlywheelDirection.IN);

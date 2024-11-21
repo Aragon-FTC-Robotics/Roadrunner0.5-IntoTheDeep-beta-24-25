@@ -27,6 +27,7 @@ public class FullTeleop extends LinearOpMode {
     public Flywheel flywheel = new Flywheel();
     public IntakeWrist intakeWrist = new IntakeWrist();
     public Wrist wrist = new Wrist();
+    public ActionHandler actionHandler = new ActionHandler();
 
     public Gamepad gp1;
     public Gamepad gp2;
@@ -47,6 +48,7 @@ public class FullTeleop extends LinearOpMode {
         intakeWrist.init(hardwareMap);
         slides.init(hardwareMap);
         wrist.init(hardwareMap);
+        actionHandler.init(hardwareMap);
 
         gp1 = gamepad1;
         gp2 = gamepad2;
@@ -62,6 +64,7 @@ public class FullTeleop extends LinearOpMode {
             intakeWrist.Loop(gp1, gp2);
             slides.Loop(gp1, gp2);
             wrist.Loop(gp1, gp2);
+            actionHandler.Loop(gp1, gp2);
         }
     }
 }
