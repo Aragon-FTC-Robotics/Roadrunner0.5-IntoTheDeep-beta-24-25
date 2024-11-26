@@ -1,12 +1,17 @@
 package org.firstinspires.ftc.teamcode.TestOP;
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PIDController;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-
-public class ExtendoPIDtuning {
+@Config
+@TeleOp
+public class ExtendoPIDtuning extends OpMode {
 
     //horizontal slides, wrist (servo), flywheels
     // vert slides, bar (motor), claw (servo), wrist (servo)
@@ -16,36 +21,34 @@ public class ExtendoPIDtuning {
     public static double f=-0.11;
     double extendoPos;
     double power;
-    double pid;
     public int target = 0;
     private final double ticks_in_degree = 2786.2 / 360;
 
     Gamepad gp;
     DcMotorEx extendo;
     int ePos;
-
-    public void init(HardwareMap hm) {
+    @Override
+    public void init() {
         controller = new PIDController(p,i,d);
-        extendo = hm.get(DcMotorEx.class, "extendo");
+        extendo = hardwareMap.get(DcMotorEx.class, "extendo");
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         ePos = 0;
         extendo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
-
-    public void Loop(Gamepad gp1, Gamepad gp2) {
+    @Override
+    public void loop() {
         controller.setPID(p,i,d);
 
-        extendoPos = extendo.getCurrentPosition();
-        pid = controller.calculate(extendoPos, target);
-        double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
+        int extendoPos = extendo.getCurrentPosition();
+        double pid = controller.calculate(extendoPos, target);
+        double ff = 0;
 
         power = pid + ff;
 
-        if (gp2.dpad_left) {
-            ePos = 600;
-        } else if (gp2.dpad_right) {
-            ePos = 0;
-        }
-        moveToPos(ePos);
+        extendo.setPower(power);
+        telemetry.addData("pos ", extendoPos);
+        telemetry.addData("target ", target);
+        telemetry.update();
     }
 
     private void moveToPos(int position) {

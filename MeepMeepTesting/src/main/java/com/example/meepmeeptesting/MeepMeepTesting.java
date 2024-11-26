@@ -28,8 +28,10 @@ public class MeepMeepTesting {
                         .setTangent(Math.toRadians(15))
                         .splineToSplineHeading(new Pose2d(38.8, -36.8, Math.toRadians(25)),Math.toRadians(15)) //extnedo to saple2
                         .waitSeconds(0.1) //extendo
-                        .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-70)))
-                        .waitSeconds(1) //outtake
+                        .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-50)))
+                        .waitSeconds(0.1) //outtake
+                        .setTangent(Math.toRadians(0))
+                        .splineToSplineHeading(new Pose2d(47.9, -35.1, Math.toRadians(40)),Math.toRadians(45)) //extendo to sample3
                         .build());
 
 
