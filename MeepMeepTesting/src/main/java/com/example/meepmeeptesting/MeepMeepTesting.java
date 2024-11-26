@@ -15,9 +15,9 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(72, 72, Math.toRadians(180), Math.toRadians(90), 15)
                 .followTrajectorySequence(drive -> drive.trajectorySequenceBuilder(new Pose2d(23.5, -60, Math.toRadians(90)))
-                        //slides to upclippos
+                        //clip1
                         .lineToConstantHeading(new Vector2d(5, -35)) // To clipping bar
-                        //slides to downclippos
+                        //clip2
                         //open claw
                         .waitSeconds(0.1)
                         .setTangent(Math.toRadians(-65))
@@ -35,8 +35,30 @@ public class MeepMeepTesting {
                         .waitSeconds(0.1) //extendo
                         .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-50)))
                         .waitSeconds(0.1) //outtake
+                        .setTangent(Math.toRadians(-100))
+                        .splineToSplineHeading(new Pose2d(35, -58, Math.toRadians(90)),Math.toRadians(-100))
+                        .waitSeconds(0.1) //claw close
+                        .lineToConstantHeading(new Vector2d(5, -35)) // To clipping bar
+                        .waitSeconds(0.1) //clip1and2 SAMP#2
+                        .lineToConstantHeading(new Vector2d(35,-58)) // to wall itnake
+                        .waitSeconds(0.1)
+                        .lineToConstantHeading(new Vector2d(5, -35)) // To clipping bar
+                        .waitSeconds(0.1) //clip1and2 SAMP#3
+                        .lineToConstantHeading(new Vector2d(35,-58)) // to wall itnake
+                        .waitSeconds(0.1)
+                        .lineToConstantHeading(new Vector2d(5, -35)) // To clipping bar
+                        .waitSeconds(0.1) //clip1and2 SAMP#4
+                        .lineToConstantHeading(new Vector2d(35,-58)) // to wall itnake
+                        .waitSeconds(0.1)
+                        .lineToConstantHeading(new Vector2d(5, -35)) // To clipping bar
+                        .waitSeconds(0.1) //clip1and2 SAMP#5
+                        .lineToConstantHeading(new Vector2d(35,-58)) // to wall itnake
+                        .waitSeconds(0.1)
+
+
+
                         .setTangent(135)
-                        .splineToLinearHeading(new Pose2d(30, -10, Math.toRadians(0)), Math.toRadians(135)) //extendo IN and bar UP
+                        .splineToLinearHeading(new Pose2d(30, -10, Math.toRadians(0)), Math.toRadians(135)) //extendo IN and bar UP, to ASCEnt bar
                         .build());
 
 
