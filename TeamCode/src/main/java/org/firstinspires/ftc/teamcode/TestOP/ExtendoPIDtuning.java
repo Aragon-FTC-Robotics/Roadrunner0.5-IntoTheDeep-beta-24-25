@@ -34,6 +34,7 @@ public class ExtendoPIDtuning extends OpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         ePos = 0;
         extendo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        extendo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     @Override
     public void loop() {
