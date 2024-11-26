@@ -22,7 +22,7 @@ public class SlidesPIDtuning extends OpMode {
     public static double f=0;
     double slidesPos;
     double power;
-    public int target = 0;
+    public final int target = 0;
     private final double ticks_in_degree = 2786.2 / 360;
 
     Gamepad gp;

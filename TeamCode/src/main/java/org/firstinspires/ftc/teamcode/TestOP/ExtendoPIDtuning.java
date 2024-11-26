@@ -17,11 +17,11 @@ public class ExtendoPIDtuning extends OpMode {
     // vert slides, bar (motor), claw (servo), wrist (servo)
 
     private PIDController controller;
-    public static double p=0.006, i=0.1, d=0.0005; //find values
-    public static double f=-0.11;
+    public static double p=0.010, i=0, d=0.0001; //find values
+    public static double f=0;
     double extendoPos;
     double power;
-    public int target = 0;
+    public static int target = 0;
     private final double ticks_in_degree = 2786.2 / 360;
 
     Gamepad gp;
@@ -42,21 +42,18 @@ public class ExtendoPIDtuning extends OpMode {
 
         int extendoPos = extendo.getCurrentPosition();
         double pid = controller.calculate(extendoPos, target);
-        double ff = 0;
+        double ff = f;
 
-        power = pid + ff;
+        double power = pid + ff;
 
         extendo.setPower(power);
         telemetry.addData("pos ", extendoPos);
         telemetry.addData("target ", target);
         telemetry.update();
+
     }
 
-    private void moveToPos(int position) {
-        extendo.setTargetPosition(position);
-        extendo.setPower(power); // change if its too high or low
-        extendo.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
+
 
     public int getePos() {
         return ePos;

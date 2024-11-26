@@ -24,7 +24,7 @@ public class Flywheel {
                 flywheel.setPower(0.8);
                 break;
             case OUT:
-                flywheel.setPower(-0.8);
+                flywheel.setPower(-0.3);
                 break;
             case STOP:
                 flywheel.setPower(0);

@@ -209,7 +209,7 @@ public class SensorColorTESTOP extends LinearOpMode {
       if (colorSensor instanceof DistanceSensor) {
         telemetry.addData("Distance (cm)", "%.3f", ((DistanceSensor) colorSensor).getDistance(DistanceUnit.CM));
       }
-
+    telemetry.addData("guhgha", colorSensor.getNormalizedColors().red);
       telemetry.update();
 
       // Change the Robot Controller's background color to match the color detected by the color sensor.
