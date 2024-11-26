@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 @Config
@@ -25,36 +26,47 @@ public class SlidesPIDtuning extends OpMode {
     private final double ticks_in_degree = 2786.2 / 360;
 
     Gamepad gp;
-    DcMotorEx slides;
+    DcMotorEx leftSlide;
+    DcMotorEx rightSlide;
     int sPos;
     @Override
     public void init() {
         controller = new PIDController(p,i,d);
-        slides = hardwareMap.get(DcMotorEx.class, "slides");
+        leftSlide = hardwareMap.get(DcMotorEx.class, "leftSlide");
+        rightSlide = hardwareMap.get(DcMotorEx.class, "rightSlide");
+
+        leftSlide.setDirection(DcMotorSimple.Direction.REVERSE);
+
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         sPos = 0;
-        slides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
     @Override
     public void loop() {
         controller.setPID(p,i,d);
 
-        int slidesPos = slides.getCurrentPosition();
-        double pid = controller.calculate(slidesPos, target);
+        int leftslidesPos = leftSlide.getCurrentPosition();
+        double pid = controller.calculate(leftslidesPos, target);
         double ff = 0;
 
         power = pid + ff;
 
-        slides.setPower(power);
-        telemetry.addData("pos ", slidesPos);
+        leftSlide.setPower(power);
+        rightSlide.setPower(power);
+
+        telemetry.addData("pos ", leftslidesPos);
         telemetry.addData("target ", target);
         telemetry.update();
     }
 
     private void moveToPos(int position) {
-        slides.setTargetPosition(position);
-        slides.setPower(power); // change if its too high or low
-        slides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftSlide.setTargetPosition(position);
+        rightSlide.setTargetPosition(position);
+
+        leftSlide.setPower(power); // change if its too high or low
+        rightSlide.setPower(power);
     }
 
     public int getePos() {

@@ -32,6 +32,11 @@ public class MeepMeepTesting {
                         .waitSeconds(0.1) //outtake
                         .setTangent(Math.toRadians(0))
                         .splineToSplineHeading(new Pose2d(47.9, -35.1, Math.toRadians(40)),Math.toRadians(45)) //extendo to sample3
+                        .waitSeconds(0.1) //extendo
+                        .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-50)))
+                        .waitSeconds(0.1) //outtake
+                        .setTangent(135)
+                        .splineToLinearHeading(new Pose2d(30, -10, Math.toRadians(0)), Math.toRadians(135)) //extendo IN and bar UP
                         .build());
 
 
