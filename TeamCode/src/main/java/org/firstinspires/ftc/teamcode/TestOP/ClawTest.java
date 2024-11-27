@@ -7,25 +7,26 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class ClawTest {
     Servo clawTest;
-    int cPos;
+    double cPos;
 
     public void init(HardwareMap hm) {
-        clawTest = hm.get(Servo.class, "claw");
+        clawTest = hm.get(Servo.class, "claw1");
         cPos = 0;
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
 
-//  Bar Testing Values
         if (gp2.dpad_up) {
-            cPos += 0.0001;
+            cPos += 0.001;
         } else if (gp2.dpad_down) {
-            cPos -= 0.0001;
+            cPos -= 0.001;
         }
         clawTest.setPosition(cPos);
+
     }
 
-    public int getcPos() {
+    public double getcPos() {
         return cPos;
     }
+    public double getClawgetPos() {return clawTest.getPosition();}
 }

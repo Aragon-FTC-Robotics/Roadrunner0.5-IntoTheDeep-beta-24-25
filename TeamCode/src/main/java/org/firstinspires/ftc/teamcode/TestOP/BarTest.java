@@ -11,7 +11,7 @@ public class BarTest {
     Servo barLeft;
     Servo barRight;
 
-    int bPos;
+    double bPos;
     public void init(HardwareMap hm) {
         barLeft = hm.get(Servo.class, "barLeft");
         barRight = hm.get(Servo.class, "barRight");
@@ -21,22 +21,22 @@ public class BarTest {
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (gp2.x) {
-            bPos += 10;
+            bPos += 0.0001;
         } else if (gp2.a) {
-            bPos -= 10;
+            bPos -= 0.0001;
         }
         moveToPos(bPos);
     }
 
-    private void moveToPos(int position) {
+    private void moveToPos(double position) {
         barLeft.setPosition(bPos);
         barRight.setPosition(bPos);
     }
 
-    public int getleftPos() {
+    public double getleftPos() {
         return bPos;
     }
-    public int getrightPos() {
+    public double getrightPos() {
         return bPos;
     }
 }

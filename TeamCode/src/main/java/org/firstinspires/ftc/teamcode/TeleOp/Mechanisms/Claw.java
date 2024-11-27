@@ -34,11 +34,11 @@ public class Claw {
         currentClawState = state;
     }
     private void openPosition() {
-        double openPos = 0.85;
+        double openPos = 0.62;
         claw1.setPosition(openPos);
     }
     private void closePosition() {
-        double closePos = 1;
+        double closePos = 0.8;
         claw1.setPosition(closePos);
     }
 }

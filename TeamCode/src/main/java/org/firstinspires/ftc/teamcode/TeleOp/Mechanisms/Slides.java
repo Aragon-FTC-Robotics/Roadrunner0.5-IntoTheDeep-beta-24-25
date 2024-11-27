@@ -9,16 +9,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Slides {
     private PIDController controller;
-    public static double p=0.000, i=0.0, d=0.0000;
-    public static double f=-0.00;
+    public static double p=0.0055, i=0, d=0.0001;
+    public static double f=0;
     private final double ticks_in_degree = 1 / 1;
     DcMotorEx slideLeft;
     DcMotorEx slideRight;
 
     int groundPos = 0;
     int lowPos = 200;
-    int medPos = 400;
-    int highPos = 1200;
+    int medPos = 930;
+    int highPos = 2600;
     public int target = 0;
     double armPos, power, pid;
     public enum slideState {GROUND, CLIP, MED, HIGH}

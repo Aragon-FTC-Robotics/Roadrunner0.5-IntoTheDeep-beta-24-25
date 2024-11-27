@@ -18,11 +18,11 @@ public class SlidesPIDtuning extends OpMode {
     // vert slides, bar (motor), claw (servo), wrist (servo)
 
     private PIDController controller;
-    public static double p=0.00, i=0., d=0.000; //find values
+    public static double p=0.0055, i=0, d=0.0001; //find values
     public static double f=0;
     double slidesPos;
     double power;
-    public final int target = 0;
+    public static int target = 0;
     private final double ticks_in_degree = 2786.2 / 360;
 
     Gamepad gp;
@@ -35,7 +35,7 @@ public class SlidesPIDtuning extends OpMode {
         slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
 
-        slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         sPos = 0;

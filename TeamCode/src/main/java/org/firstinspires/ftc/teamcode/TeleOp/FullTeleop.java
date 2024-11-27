@@ -40,11 +40,11 @@ public class FullTeleop extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 //        bar.init(hardwareMap);
-//        claw.init(hardwareMap);
+        claw.init(hardwareMap);
 //        colorsensor.init(hardwareMap);
 //        drivetrain.init(hardwareMap);
 //        extendo.init(hardwareMap);
-        flywheel.init(hardwareMap);
+//        flywheel.init(hardwareMap);
 //        intakeWrist.init(hardwareMap);
 //        slides.init(hardwareMap);
 //        wrist.init(hardwareMap);
@@ -57,10 +57,10 @@ public class FullTeleop extends LinearOpMode {
 
         while(opModeIsActive() && !isStopRequested()) {
 //            bar.Loop(gp1, gp2);
-//            claw.Loop(gp1, gp2);
+            claw.Loop(gp1, gp2);
 //            drivetrain.Loop(gp1, gp2);
 //            extendo.Loop(gp1, gp2);
-            flywheel.Loop(gp1, gp2);
+//            flywheel.Loop(gp1, gp2);
 //            intakeWrist.Loop(gp1, gp2);
 //            slides.Loop(gp1, gp2);
 //            wrist.Loop(gp1, gp2);

@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="1+3 LEFt\uD83D\uDEE5\uFE0F")
+@Autonomous(name="4+0 right\uD83D\uDEE5\uFE0F")
 public class Auto_right_0_4 extends LinearOpMode {
     final double INTAKEPOWER = 0.5; //
     final double IWRISTGROUND = 0;
