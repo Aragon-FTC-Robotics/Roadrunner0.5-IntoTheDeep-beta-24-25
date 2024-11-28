@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
 
-@TeleOp(name="FULLOPMOSE pidedition \uD83D\uDCA6", group="Linear OpMode")
+@TeleOp(name="beta bog", group="Linear OpMode")
 public class FullTeleop extends LinearOpMode {
 
     public Bar bar = new Bar();
@@ -42,11 +42,11 @@ public class FullTeleop extends LinearOpMode {
 //        bar.init(hardwareMap);
         claw.init(hardwareMap);
 //        colorsensor.init(hardwareMap);
-//        drivetrain.init(hardwareMap);
-//        extendo.init(hardwareMap);
-//        flywheel.init(hardwareMap);
+        drivetrain.init(hardwareMap);
+        extendo.init(hardwareMap);
+        flywheel.init(hardwareMap);
 //        intakeWrist.init(hardwareMap);
-//        slides.init(hardwareMap);
+        slides.init(hardwareMap);
 //        wrist.init(hardwareMap);
 //        actionHandler.init(hardwareMap);
 
@@ -58,13 +58,18 @@ public class FullTeleop extends LinearOpMode {
         while(opModeIsActive() && !isStopRequested()) {
 //            bar.Loop(gp1, gp2);
             claw.Loop(gp1, gp2);
-//            drivetrain.Loop(gp1, gp2);
-//            extendo.Loop(gp1, gp2);
-//            flywheel.Loop(gp1, gp2);
+            drivetrain.Loop(gp1, gp2);
+            extendo.Loop(gp1, gp2);
+            flywheel.Loop(gp1, gp2);
 //            intakeWrist.Loop(gp1, gp2);
-//            slides.Loop(gp1, gp2);
+            slides.Loop(gp1, gp2);
 //            wrist.Loop(gp1, gp2);
 //            actionHandler.Loop(gp1, gp2);
+            telemetry.addData("Extendopos1", extendo.getPos());
+            telemetry.addData("Extendopos2", extendo.getExtendopos());
+            telemetry.addData("slideLpos", slides.getLPos());
+            telemetry.addData("slideRpos", slides.getRPos());
+            telemetry.update();
         }
     }
 }

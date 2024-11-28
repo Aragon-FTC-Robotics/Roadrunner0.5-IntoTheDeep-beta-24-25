@@ -30,7 +30,7 @@ public class Slides {
         slideLeft = hm.get(DcMotorEx.class, "slideLeft");
         slideRight = hm.get(DcMotorEx.class, "slideRight");
 
-        slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         slideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -88,4 +88,6 @@ public class Slides {
 //        slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
+    public int getLPos(){return slideLeft.getCurrentPosition();}
+    public int getRPos(){return slideRight.getCurrentPosition();}
 }

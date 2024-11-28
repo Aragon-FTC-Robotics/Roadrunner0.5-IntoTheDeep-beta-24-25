@@ -16,7 +16,7 @@ public class Extendo {
     double pos;
     double speed = 5;
     double pid, power;
-    final int max = 620; //580 mm extendo
+    final int max = 600; //580 mm extendo
     final int min = 0;
     public void init(HardwareMap hm) {
         controller = new PIDController(p,i,d);
@@ -63,4 +63,5 @@ public class Extendo {
     public double getPos() {
         return pos;
     }
+    public double getExtendopos() {return extendoMotor.getCurrentPosition();}
 }
