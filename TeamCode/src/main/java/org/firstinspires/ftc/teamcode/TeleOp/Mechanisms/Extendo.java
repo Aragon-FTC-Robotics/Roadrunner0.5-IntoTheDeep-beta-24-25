@@ -17,7 +17,7 @@ public class Extendo {
     double speed = 5;
     double pid, power;
     final int max = 600; //580 mm extendo
-    final int min = 0;
+    final int min = -200;
     public void init(HardwareMap hm) {
         controller = new PIDController(p,i,d);
         extendoMotor = hm.get(DcMotorEx.class, "extendo");

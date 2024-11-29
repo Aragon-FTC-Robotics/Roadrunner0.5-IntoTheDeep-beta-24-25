@@ -12,7 +12,7 @@ public class SlidesTest {
 
     Gamepad gp;
     DcMotor slideLeft;
-    DcMotor slideRight;;
+    DcMotor slideRight;
     int sPos;
 
     public void init(HardwareMap hm) {
@@ -51,4 +51,5 @@ public class SlidesTest {
     public int getrightPos() {
         return slideRight.getCurrentPosition();
     }
+    public int getSpos() {return sPos;}
 }

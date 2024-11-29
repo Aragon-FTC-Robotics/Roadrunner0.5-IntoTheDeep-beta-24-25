@@ -15,15 +15,16 @@ public class BarTest {
     public void init(HardwareMap hm) {
         barLeft = hm.get(Servo.class, "barLeft");
         barRight = hm.get(Servo.class, "barRight");
-        bPos = 0;
+        bPos = 0.8;
+        barLeft.setDirection(Servo.Direction.FORWARD);
         barRight.setDirection(Servo.Direction.REVERSE);
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (gp2.x) {
-            bPos += 0.0001;
+            bPos += 0.001;
         } else if (gp2.a) {
-            bPos -= 0.0001;
+            bPos -= 0.001;
         }
         moveToPos(bPos);
     }

@@ -81,6 +81,7 @@ public class Slides {
     public void slidePosition(double power, int pos) {
         slideLeft.setTargetPosition(pos);
         slideRight.setTargetPosition(pos);
+        target = pos;
 
         slideLeft.setPower(power);
         slideRight.setPower(power);
