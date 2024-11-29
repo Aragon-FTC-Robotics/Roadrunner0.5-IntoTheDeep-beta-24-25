@@ -36,7 +36,7 @@ public class MeepMeepTesting {
                         .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-50)))
                         .waitSeconds(0.1) //outtake
                         .setTangent(Math.toRadians(-100))
-                        .splineToSplineHeading(new Pose2d(35, -58, Math.toRadians(90)),Math.toRadians(-100))
+                        .splineToSplineHeading(new Pose2d(35, -58, Math.toRadians(90)),Math.toRadians(-100))//to walli ntake
                         .waitSeconds(0.1) //claw close
                         .lineToConstantHeading(new Vector2d(5, -35)) // To clipping bar
                         .waitSeconds(0.1) //clip1and2 SAMP#2
