@@ -68,4 +68,6 @@ public class Wrist {
     public void wristPos(double pos){
         wrist.setPosition(pos);
     }
+    public int portNumber(){return wrist.getPortNumber();}
+    public Object getDirection(){return wrist.getDirection();}
 }

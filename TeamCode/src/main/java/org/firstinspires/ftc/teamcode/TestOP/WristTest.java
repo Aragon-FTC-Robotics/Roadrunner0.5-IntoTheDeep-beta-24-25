@@ -10,13 +10,13 @@ public class WristTest {
 
     public void init(HardwareMap hm) {
         wristServo = hm.get(Servo.class, "wrist");
-        pos = 0.32;
+        pos = 0.320;
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp1.dpad_left) {
+        if (gp2.left_bumper) {
             pos += 0.001;
-        } else if (gp1.dpad_right) {
+        } else if (gp2.right_bumper) {
             pos -= 0.001;
         }
         wristServo.setPosition(pos);
@@ -25,4 +25,6 @@ public class WristTest {
     public double getwPos() {
         return pos;
     }
+    public int portNumber(){return wristServo.getPortNumber();}
+    public Object getDirection(){return wristServo.getDirection();}
 }

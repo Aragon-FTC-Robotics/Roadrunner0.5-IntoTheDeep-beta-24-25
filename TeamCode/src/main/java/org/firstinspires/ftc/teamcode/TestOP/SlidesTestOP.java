@@ -31,6 +31,7 @@ public class SlidesTestOP extends LinearOpMode {
             slidesTest.Loop(gp1, gp2);
             telemetry.addData("slideLeft.pos", slidesTest.getleftPos());
             telemetry.addData("slideRight.pos", slidesTest.getrightPos());
+            telemetry.addData("spos", slidesTest.getSpos());
             telemetry.update();
         }
     }

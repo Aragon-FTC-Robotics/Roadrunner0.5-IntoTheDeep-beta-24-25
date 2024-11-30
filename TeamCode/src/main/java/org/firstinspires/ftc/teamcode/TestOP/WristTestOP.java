@@ -32,6 +32,8 @@ public class WristTestOP extends LinearOpMode {
             wristTest.Loop(gp1, gp2);
 
             telemetry.addData("wrist.pos", "%.3f", wristTest.getwPos());
+            telemetry.addData("port #", wristTest.portNumber());
+            telemetry.addData("dir", wristTest.getDirection());
             telemetry.update();
         }
     }
