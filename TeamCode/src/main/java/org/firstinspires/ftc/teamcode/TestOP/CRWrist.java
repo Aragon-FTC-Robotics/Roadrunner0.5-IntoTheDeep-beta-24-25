@@ -9,7 +9,7 @@ public class CRWrist {
     double power;
     double currentDeg = 0;
     double moveDeg;
-    final double secPerDeg = 0.1 / 360; // time in sec to move 360
+    final double secPerDeg = (double) 1 / 85; // moves 85 deg per sec
 
     public void init (HardwareMap hm){
         wrist = hm.get(CRServo.class, "CRWrist");
@@ -18,12 +18,17 @@ public class CRWrist {
 
     public void Loop(Gamepad gp1, Gamepad gp2) throws InterruptedException {
         move(90);
+        wait(1);
+        move(10);
 
         if (gp1.dpad_left){
             power += 0.01;
+            System.out.println("Power increased: " + power);
         } else if (gp1.dpad_right) {
             power -= 0.01;
+            System.out.println("Power increased: " + power);
         }
+
     }
 
     public void move(double targetDeg) throws InterruptedException {
@@ -33,11 +38,11 @@ public class CRWrist {
 
         if (moveDeg > 0) {
             wrist.setPower(0.5); //0.5 is placeholder
-            wait((long) (timeToMove * 1000));
+            Thread.sleep((long) (timeToMove * 1000));
             wrist.setPower(0);
         } else if (moveDeg < 0) {
             wrist.setPower(-0.5); //-.5 is placeholder
-            wait((long) (timeToMove * 1000));
+            Thread.sleep((long) (timeToMove * 1000));
             wrist.setPower(0);
         }
 
