@@ -3,14 +3,22 @@ package org.firstinspires.ftc.teamcode.TestOP;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
+
+import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Drivetrain;
+
 //TRANSFER -- bar 0.933, claw 0.785, wrist 0.040
 //HIGH BUCKET -- bar 0.318, claw 0.733, wrist 0.979
+//OUTTAKE -- bar 0, claw close, wrist 0
+//CLIP1 -- bar 0.399, claw close 0.797, wrist 0.968
+//CLIP2
+//WALL INTAKE -- bar 0.960, claw open 0.664, wrist 0.436
 @TeleOp(name="bwc \uD83D\uDE1B\uD83D\uDE1B\uD83D\uDE1B\uD83D\uDE1B", group="Test OP")
 public class barwristclaw extends LinearOpMode {
 
     public BarTest bar = new BarTest();
     public ClawTest claw = new ClawTest();
     public WristTest wrist = new WristTest();
+    public Drivetrain drivetrain = new Drivetrain();
     public Gamepad gp1;
     public Gamepad gp2;
 
@@ -25,6 +33,7 @@ public class barwristclaw extends LinearOpMode {
         bar.init(hardwareMap);
         claw.init(hardwareMap);
         wrist.init(hardwareMap);
+        drivetrain.init(hardwareMap);
 
         gp1 = gamepad1;
         gp2 = gamepad2;
@@ -36,6 +45,7 @@ public class barwristclaw extends LinearOpMode {
             bar.Loop(gp1, gp2);
             claw.Loop(gp1, gp2);
             wrist.Loop(gp1, gp2);
+            drivetrain.Loop(gp1, gp2);
             telemetry.addData("rightBar.value", bar.getrightPos());
             telemetry.addData("leftBar.value", bar.getleftPos());
             telemetry.addData("claw.getCpos","%.5f", claw.getcPos());

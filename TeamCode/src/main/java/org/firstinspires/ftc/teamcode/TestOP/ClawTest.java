@@ -11,7 +11,7 @@ public class ClawTest {
 
     public void init(HardwareMap hm) {
         clawTest = hm.get(Servo.class, "claw1");
-        cPos = 0;
+        cPos = 0.785;
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
