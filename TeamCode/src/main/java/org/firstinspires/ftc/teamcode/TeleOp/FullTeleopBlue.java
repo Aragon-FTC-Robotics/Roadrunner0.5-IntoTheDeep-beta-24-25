@@ -15,8 +15,8 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
 
-@TeleOp(name="beta bog", group="Linear OpMode")
-public class FullTeleop extends LinearOpMode {
+@TeleOp(name="what if the joker was Blue and yellow", group="Linear OpMode")
+public class FullTeleopBlue extends LinearOpMode {
 
     public Bar bar = new Bar();
     public Claw claw = new Claw();
@@ -48,7 +48,7 @@ public class FullTeleop extends LinearOpMode {
         intakeWrist.init(hardwareMap);
         slides.init(hardwareMap);
         wrist.init(hardwareMap);
-        actionHandler.init(slides,extendo,bar,wrist,flywheel,claw,intakeWrist,colorsensor);
+        actionHandler.init(slides,extendo,bar,wrist,flywheel,claw,intakeWrist,colorsensor, "blue");
 
         gp1 = gamepad1;
         gp2 = gamepad2;

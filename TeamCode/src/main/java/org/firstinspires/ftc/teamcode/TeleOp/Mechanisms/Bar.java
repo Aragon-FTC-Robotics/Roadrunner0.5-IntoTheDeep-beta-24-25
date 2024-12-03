@@ -55,8 +55,8 @@ public class Bar {
         barServoRight.setPosition(pos);
     }
 
-    public void setState(BarState bar) {
-        currentBarState = bar;
+    public void setState(BarState bStateyeah) {
+        this.currentBarState = bStateyeah;
     }
 
     public double getPos() {return pos;}
