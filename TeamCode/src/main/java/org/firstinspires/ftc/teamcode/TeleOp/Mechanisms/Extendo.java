@@ -10,11 +10,10 @@ public class Extendo {
     private PIDController controller;
     public static double p=0.010, i=0, d=0.0001; //find values
     public static double f=0;
-    private final double ticks_in_degree = 1 / 1;
     DcMotorEx extendoMotor;
 
     double pos;
-    double speed = 5;
+    double speed = 15;
     double pid, power;
     final int max = 600; //580 mm extendo
     final int min = -200;

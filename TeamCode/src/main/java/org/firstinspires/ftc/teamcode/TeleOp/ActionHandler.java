@@ -25,17 +25,44 @@ public class ActionHandler {
     private Claw claw;
     private IntakeWrist intakeWrist;
     private Colorsensor colorSensor;
-    public void init(Slides s, Extendo e, Bar b, Wrist w, Flywheel f, Claw c, IntakeWrist iw, Colorsensor cs){
+    private boolean intook = false;
+    private boolean intaking = false;
+    private String alliance;
+    public void init(Slides s, Extendo e, Bar b, Wrist w, Flywheel f, Claw c, IntakeWrist iw, Colorsensor cs, String alliance){
         slides=s;extendo=e;bar=b;wrist=w;flywheel=f;claw=c;intakeWrist=iw;colorSensor=cs;
+        this.alliance = alliance;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) throws InterruptedException {
         //Intake action, runs intake + color sensor check
-        if (gp1.y) {
-            flywheel.setState(Flywheel.FlywheelDirection.IN);
-        } else if (gp1.a){
-            flywheel.setState(Flywheel.FlywheelDirection.OUT);
-        } else {
-            flywheel.setState(Flywheel.FlywheelDirection.STOP);
+        if (gp1.y && !intaking) {
+            intaking = true;
+        }
+        if (intaking) {
+            if (flywheel.getState() != Flywheel.FlywheelDirection.IN) {flywheel.setState(Flywheel.FlywheelDirection.IN);}
+            if (
+                    (alliance == "red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow())
+                ||  (alliance == "blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow())
+            ) { //Intakes correct color
+                Thread.sleep(200);
+                if (
+                        (alliance == "red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow())
+                    ||  (alliance == "blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow())
+                ) {
+                    flywheel.setState(Flywheel.FlywheelDirection.STOP);
+                    intaking = false;
+                }
+            }
+            if (
+                    (alliance == "red") && colorSensor.sensorIsBlue()
+                ||  (alliance == "blue") && colorSensor.sensorIsRed()
+            ) {
+                Thread.sleep(200);
+                if (colorSensor.sensorIsBlue()) {
+                    flywheel.setState(Flywheel.FlywheelDirection.OUT);
+                    Thread.sleep(1000);
+                    flywheel.setState(Flywheel.FlywheelDirection.IN);
+                }
+            }
         }
         //LATER: MAKE IT RUMBLE OR SOMETHING
         //
@@ -93,6 +120,7 @@ public class ActionHandler {
         wrist.setState(Wrist.wristState.TRANSFER);
         Thread.sleep(2000);
         claw.setState(Claw.ClawState.OPEN);
+        Thread.sleep(200);
         bar.setState(Bar.BarState.WALL);
     }
     public void Clip1() {

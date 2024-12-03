@@ -26,7 +26,7 @@ public class Bar {
         barServoRight = hm.get(Servo.class, "barRight");
         barServoRight.setDirection(Servo.Direction.REVERSE);
         barServoLeft.setDirection(Servo.Direction.FORWARD);
-        currentBarState = BarState.TRANSFER;
+        currentBarState = BarState.WALL;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
         switch(currentBarState) {

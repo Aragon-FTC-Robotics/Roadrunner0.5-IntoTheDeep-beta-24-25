@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class IntakeWrist {
     Servo iWrist;
-    public iwristState  currentiWrist;
     public enum iwristState {IN, OUT};
+    public iwristState currentiWrist = iwristState.IN;
     public final double INPOS = 0.134;
     public final double OUTPOS = 1.000;
     public void init(HardwareMap hm) {
@@ -34,12 +34,12 @@ public class IntakeWrist {
     }
 
     private void inPosition() {
-        double openPos = 1;
+        double openPos = INPOS;
         iWrist.setPosition(openPos);
     }
 
     private void outPosition() {
-        double closePos = 1;
+        double closePos = OUTPOS;
         iWrist.setPosition(closePos);
     }
 }

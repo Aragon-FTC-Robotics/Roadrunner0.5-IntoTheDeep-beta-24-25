@@ -31,4 +31,5 @@ public class Flywheel {
     public void setState(FlywheelDirection state) {
         currentFlywheelState = state;
     }
+    public FlywheelDirection getState() {return currentFlywheelState;}
 }
