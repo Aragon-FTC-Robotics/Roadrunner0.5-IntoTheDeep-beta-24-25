@@ -6,41 +6,22 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Wrist {
     Servo wrist;
-
-    double defPos = 0;
-    double transfer;
-    double bucket;
-    double wall;
-    double clip;
+    final double transfer = 0.022;
+    final double bucket = 1.000;
+    final double wall = 0.419;
+    final double clip1 = 0.932;
+    final double clip2 = 0.552;
 
     double speed;
 
-    public enum wristState {TRANSFER, BUCKET, WALL, CLIP}
-    wristState currentWristState = wristState.TRANSFER;
+    public enum wristState {TRANSFER, BUCKET, WALL, CLIP1, CLIP2}
+    wristState currentWristState = wristState.WALL;
 
     public void init(HardwareMap hm) {
         wrist = hm.get(Servo.class, "wrist");
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (!(gp1.a&&(gp1.dpad_up||gp2.dpad_right)&&gp2.b)){
-            defPos += (gp2.left_trigger - gp2.right_trigger) * speed;
-            if (defPos > 1) {
-                defPos = 1;
-            } else if (defPos < 0) {
-                defPos = 0;
-            }
-
-            if(gp2.dpad_down) {
-                setState(wristState.TRANSFER);
-            } else if(gp1.x) {
-                setState(wristState.WALL);
-            } else if(gp1.y) {
-                setState(wristState.CLIP);
-            } else if(gp2.dpad_left) {
-                setState(wristState.BUCKET);
-            }
-
             switch(currentWristState) {
                 case TRANSFER:
                     wristPos(transfer);
@@ -48,8 +29,11 @@ public class Wrist {
                 case WALL:
                     wristPos(wall);
                     break;
-                case CLIP:
-                    wristPos(clip);
+                case CLIP1:
+                    wristPos(clip1);
+                    break;
+                case CLIP2:
+                    wristPos(clip2);
                     break;
                 case BUCKET:
                     wristPos(bucket);
@@ -58,7 +42,6 @@ public class Wrist {
                     wristPos(transfer);
                     break;
             }
-        }
     }
 
     public void setState(wristState state) {

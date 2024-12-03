@@ -45,16 +45,6 @@ public class Slides {
 //        double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
         double ff = 0;
         power = pid + ff;
-        if(gp2.dpad_down) {
-            setState(slideState.GROUND);
-        } else if(gp2.dpad_right) {
-            setState(slideState.CLIP);
-        } else if(gp2.dpad_up) {
-            setState(slideState.HIGH);
-        } else if(gp2.dpad_left) {
-            setState(slideState.MED);
-        }
-
         switch(currentSlideState) {
             case GROUND:
                 slidePosition(power, groundPos);

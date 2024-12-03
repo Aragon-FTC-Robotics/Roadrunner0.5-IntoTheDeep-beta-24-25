@@ -6,12 +6,12 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Drivetrain;
 
-//TRANSFER -- bar 0.933, claw 0.785, wrist 0.040
-//HIGH BUCKET -- bar 0.318, claw 0.733, wrist 0.979
+//TRANSFER -- wrist 0.022, bar 0.948, claw close/open
+//HIGH BUCKET -- wrist 1.000, bar 0.287, claw close/open
 //OUTTAKE -- bar 0, claw close, wrist 0
-//CLIP1 -- bar 0.399, claw close 0.797, wrist 0.968
-//CLIP2
-//WALL INTAKE -- bar 0.960, claw open 0.664, wrist 0.436
+//CLIP1 -- wrist 0.932, bar 0.181, claw Close
+//CLIP2 -- wrist 0.552, bar 0.348, claw close
+//WALL INTAKE -- wrist 0.419, bar 0.917, claw veryopen
 @TeleOp(name="bwc \uD83D\uDE1B\uD83D\uDE1B\uD83D\uDE1B\uD83D\uDE1B", group="Test OP")
 public class barwristclaw extends LinearOpMode {
 

@@ -6,21 +6,16 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class IntakeWrist {
     Servo iWrist;
-    iwristState  currentiWrist;
-    enum iwristState {IN, OUT};
-
+    public iwristState  currentiWrist;
+    public enum iwristState {IN, OUT};
+    public final double INPOS = 0.134;
+    public final double OUTPOS = 1.000;
     public void init(HardwareMap hm) {
         iWrist = hm.get(Servo.class, "iWrist");
         currentiWrist = iwristState.IN;
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp1.a){
-            setCurrentiWrist(iwristState.IN);
-        } else if (gp1.y) {
-            setCurrentiWrist(iwristState.OUT);
-        }
-
         switch (currentiWrist){
             case IN:
                 inPosition();
@@ -34,7 +29,7 @@ public class IntakeWrist {
         }
     }
 
-    public void setCurrentiWrist(iwristState state) {
+    public void setState(iwristState state) {
         currentiWrist = state;
     }
 

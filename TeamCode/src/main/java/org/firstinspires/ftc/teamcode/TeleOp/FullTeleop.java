@@ -39,16 +39,16 @@ public class FullTeleop extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-//        bar.init(hardwareMap);
+        bar.init(hardwareMap);
         claw.init(hardwareMap);
-//        colorsensor.init(hardwareMap);
+        colorsensor.init(hardwareMap);
         drivetrain.init(hardwareMap);
         extendo.init(hardwareMap);
         flywheel.init(hardwareMap);
-//        intakeWrist.init(hardwareMap);
+        intakeWrist.init(hardwareMap);
         slides.init(hardwareMap);
-//        wrist.init(hardwareMap);
-//        actionHandler.init(hardwareMap);
+        wrist.init(hardwareMap);
+        actionHandler.init(slides,extendo,bar,wrist,flywheel,claw,intakeWrist,colorsensor);
 
         gp1 = gamepad1;
         gp2 = gamepad2;
@@ -56,15 +56,16 @@ public class FullTeleop extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive() && !isStopRequested()) {
-//            bar.Loop(gp1, gp2);
+            bar.Loop(gp1, gp2);
             claw.Loop(gp1, gp2);
             drivetrain.Loop(gp1, gp2);
             extendo.Loop(gp1, gp2);
             flywheel.Loop(gp1, gp2);
-//            intakeWrist.Loop(gp1, gp2);
+            intakeWrist.Loop(gp1, gp2);
             slides.Loop(gp1, gp2);
-//            wrist.Loop(gp1, gp2);
-//            actionHandler.Loop(gp1, gp2);
+            wrist.Loop(gp1, gp2);
+            actionHandler.Loop(gp1, gp2);
+            telemetry.addData("barposL", bar.getPos());
             telemetry.addData("Extendopos1", extendo.getPos());
             telemetry.addData("Extendopos2", extendo.getExtendopos());
             telemetry.addData("slideLpos", slides.getLPos());

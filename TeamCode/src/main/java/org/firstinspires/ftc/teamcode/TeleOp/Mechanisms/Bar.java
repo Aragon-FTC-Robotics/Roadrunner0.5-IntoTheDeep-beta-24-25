@@ -11,13 +11,13 @@ public class Bar {
     Servo barServoLeft;
     Servo barServoRight;
 
-    public enum BarState {TRANSFER, WALL, BUCKET, CLIPUP, CLIPDOWN}
+    public enum BarState {TRANSFER, WALL, BUCKET, CLIP2, CLIP1}
     double pos;
-    double transferpos = 0;
-    double wallpos = 0;
-    double bucketpos = 0;
-    double clipuppos = 0;
-    double clipdownpos = 0;
+    double transferpos = 0.948;
+    double wallpos = 0.917;
+    double bucketpos = 0.287;
+    double clip2 = 0.348;
+    double clip1 = 0.181;
 
     BarState currentBarState;
 
@@ -25,21 +25,10 @@ public class Bar {
         barServoLeft = hm.get(Servo.class, "barLeft");
         barServoRight = hm.get(Servo.class, "barRight");
         barServoRight.setDirection(Servo.Direction.REVERSE);
+        barServoLeft.setDirection(Servo.Direction.FORWARD);
         currentBarState = BarState.TRANSFER;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
-        if (gp1.a) { //ALL OF THESE ARE PLACEHOLDERS type baet
-            setState(BarState.TRANSFER);
-        } else if (gp2.dpad_up || gp2.dpad_right) {
-            setState(BarState.BUCKET);
-        } else if (gp2.b) {
-            setState(BarState.WALL);
-        } else if (gp2.a) {
-            setState(BarState.CLIPUP);
-        } else if (gp2.y) {
-            setState(BarState.CLIPDOWN);
-        }
-
         switch(currentBarState) {
             case TRANSFER:
                 setPos(transferpos);
@@ -50,10 +39,11 @@ public class Bar {
             case WALL:
                 setPos(wallpos);
                 break;
-            case CLIPUP:
-                setPos(clipuppos);
-            case CLIPDOWN:
-                setPos(clipdownpos);
+            case CLIP2:
+                setPos(clip2);
+                break;
+            case CLIP1:
+                setPos(clip1);
                 break;
             default:
                 setState(BarState.TRANSFER);

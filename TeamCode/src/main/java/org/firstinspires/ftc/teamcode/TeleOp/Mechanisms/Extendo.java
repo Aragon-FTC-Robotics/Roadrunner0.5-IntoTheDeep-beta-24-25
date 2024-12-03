@@ -18,6 +18,7 @@ public class Extendo {
     double pid, power;
     final int max = 600; //580 mm extendo
     final int min = -200;
+    final int mid = (int)Math.round((max+min)*0.5);
     public void init(HardwareMap hm) {
         controller = new PIDController(p,i,d);
         extendoMotor = hm.get(DcMotorEx.class, "extendo");
@@ -33,7 +34,7 @@ public class Extendo {
 
 //        pos += (speed*gp2.right_stick_y);
 
-//        if(gp2.touchpad_finger_1){pos = (gp2.touchpad_finger_1_x*((max+min)/2)+((max+min/2)));}
+//        if(gp2.touchpad_finger_1){pos = (gp2.touchpad_finger_1_x*mid + mid);}
 
         if (gp1.left_bumper){
             pos = min;
