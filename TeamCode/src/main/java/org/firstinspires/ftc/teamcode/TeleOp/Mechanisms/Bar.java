@@ -46,7 +46,7 @@ public class Bar {
                 setPos(clip1);
                 break;
             default:
-                setState(BarState.TRANSFER);
+                setState(BarState.WALL);
                 break;
         }
     }
