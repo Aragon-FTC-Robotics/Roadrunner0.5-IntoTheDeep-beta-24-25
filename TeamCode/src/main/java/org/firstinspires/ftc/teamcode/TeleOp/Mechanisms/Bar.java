@@ -54,7 +54,16 @@ public class Bar {
         barServoLeft.setPosition(pos);
         barServoRight.setPosition(pos);
     }
-
+    public String getBarState(){
+        switch(currentBarState) {
+            case TRANSFER: return "transfer";
+            case BUCKET: return "bucket";
+            case WALL: return "wall";
+            case CLIP2: return "clip2";
+            case CLIP1: return "clip1";
+            default: return "Default!! (transfer)";
+        }
+    }
     public void setState(BarState bStateyeah) {
         this.currentBarState = bStateyeah;
     }

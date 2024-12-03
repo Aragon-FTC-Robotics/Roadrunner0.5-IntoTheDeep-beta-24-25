@@ -66,6 +66,7 @@ public class FullTeleopRed extends LinearOpMode {
             wrist.Loop(gp1, gp2);
             actionHandler.Loop(gp1, gp2);
             telemetry.addData("barposL", bar.getPos());
+            telemetry.addData("bello", bar.getBarState());
             telemetry.addData("Extendopos1", extendo.getPos());
             telemetry.addData("Extendopos2", extendo.getExtendopos());
             telemetry.addData("slideLpos", slides.getLPos());
