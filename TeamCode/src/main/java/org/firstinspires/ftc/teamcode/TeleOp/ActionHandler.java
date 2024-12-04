@@ -49,14 +49,10 @@ public class ActionHandler {
         }
         //Bucket high
         if(gp2.dpad_up) {
-            slides.setState(Slides.slideState.HIGH);
-            bar.setState(Bar.BarState.BUCKET);
-            wrist.setState(Wrist.wristState.BUCKET);
+            highBucket();
         }
         if(gp2.dpad_down) {
-            slides.setState(Slides.slideState.GROUND);
-            bar.setState(Bar.BarState.WALL);
-            wrist.setState(Wrist.wristState.TRANSFER);
+            resetSlidesArm();
         }
 
         //clip Up
@@ -137,5 +133,15 @@ public class ActionHandler {
                 }
             }
         }
+    }
+    public void highBucket() {
+        slides.setState(Slides.slideState.HIGH);
+        bar.setState(Bar.BarState.BUCKET);
+        wrist.setState(Wrist.wristState.BUCKET);
+    }
+    public void resetSlidesArm() {
+        slides.setState(Slides.slideState.GROUND);
+        bar.setState(Bar.BarState.WALL);
+        wrist.setState(Wrist.wristState.TRANSFER);
     }
 }
