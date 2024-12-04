@@ -16,7 +16,7 @@ public class Extendo {
     double speed = 15;
     double pid, power;
     final int max = 600; //580 mm extendo
-    final int min = -200;
+    final int min = -150;
     final int mid = (int)Math.round((max+min)*0.5);
     boolean leftLastPressed = false;
     boolean rightLastPressed = false;

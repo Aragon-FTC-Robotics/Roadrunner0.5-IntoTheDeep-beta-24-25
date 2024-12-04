@@ -85,13 +85,13 @@ public class ActionHandler {
     }
 
     public void Transfer() throws InterruptedException {
+        claw.setState(Claw.ClawState.CLOSE);
         Thread.sleep(500);
         intakeWrist.setState(IntakeWrist.iwristState.IN);
         Thread.sleep(500);
         flywheel.setState(Flywheel.FlywheelDirection.OUT);
         Thread.sleep(250);
         flywheel.setState(Flywheel.FlywheelDirection.STOP);
-        claw.setState(Claw.ClawState.CLOSE);
         bar.setState(Bar.BarState.TRANSFER);
         wrist.setState(Wrist.wristState.TRANSFER);
         Thread.sleep(2000);
