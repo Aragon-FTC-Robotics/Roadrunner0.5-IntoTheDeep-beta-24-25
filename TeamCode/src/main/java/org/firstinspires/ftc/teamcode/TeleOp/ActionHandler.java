@@ -36,41 +36,16 @@ public class ActionHandler {
         //Intake action, runs intake + color sensor check
         if (gp1.y && !intaking) {
             intaking = true;
+            flywheel.setState(Flywheel.FlywheelDirection.IN);
         }
-        if (intaking) {
-            if (flywheel.getState() != Flywheel.FlywheelDirection.IN) {flywheel.setState(Flywheel.FlywheelDirection.IN);}
-            if (
-                    (alliance == "red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow())
-                ||  (alliance == "blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow())
-            ) { //Intakes correct color
-                Thread.sleep(200);
-                if (
-                        (alliance == "red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow())
-                    ||  (alliance == "blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow())
-                ) {
-                    flywheel.setState(Flywheel.FlywheelDirection.STOP);
-                    intaking = false;
-                }
-            }
-            if (
-                    (alliance == "red") && colorSensor.sensorIsBlue()
-                ||  (alliance == "blue") && colorSensor.sensorIsRed()
-            ) {
-                Thread.sleep(200);
-                if (colorSensor.sensorIsBlue()) {
-                    flywheel.setState(Flywheel.FlywheelDirection.OUT);
-                    Thread.sleep(1000);
-                    flywheel.setState(Flywheel.FlywheelDirection.IN);
-                }
-            }
-        }
+        intakecheck();
         //LATER: MAKE IT RUMBLE OR SOMETHING
-        //
-        if (gp1.left_bumper) {
+        if(gp1.left_bumper) {
             Transfer();
         }
-        if (gp1.right_bumper) {
-            Thread.sleep(300);
+        if(gp1.right_bumper) {
+            Thread.sleep(500);
+            intakeWrist.setState(IntakeWrist.iwristState.OUT);
         }
         //Bucket high
         if(gp2.dpad_up) {
@@ -81,7 +56,7 @@ public class ActionHandler {
         if(gp2.dpad_down) {
             slides.setState(Slides.slideState.GROUND);
             bar.setState(Bar.BarState.WALL);
-            wrist.setState(Wrist.wristState.WALL);
+            wrist.setState(Wrist.wristState.TRANSFER);
         }
 
         //clip Up
@@ -110,6 +85,7 @@ public class ActionHandler {
     }
 
     public void Transfer() throws InterruptedException {
+        Thread.sleep(500);
         intakeWrist.setState(IntakeWrist.iwristState.IN);
         Thread.sleep(500);
         flywheel.setState(Flywheel.FlywheelDirection.OUT);
@@ -127,8 +103,39 @@ public class ActionHandler {
         bar.setState(Bar.BarState.CLIP1);
         wrist.setState(Wrist.wristState.CLIP1);
     }
-    public void Clip2() {
+    public void Clip2() throws InterruptedException{
         bar.setState(Bar.BarState.CLIP2);
         wrist.setState(Wrist.wristState.CLIP2);
+        Thread.sleep(200);
+        claw.setState(Claw.ClawState.OPEN);
+    }
+    public void intakecheck() throws InterruptedException{
+        if (intaking) {
+
+            if (
+                    ((alliance == "red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow()))
+                            ||  ((alliance == "blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow()))
+            ) { //Intakes correct color
+                Thread.sleep(200);
+                if (
+                        ((alliance == "red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow()))
+                                ||  ((alliance == "blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow()))
+                ) {
+                    flywheel.setState(Flywheel.FlywheelDirection.STOP);
+                    intaking = false;
+                }
+            }
+            if (
+                    ((alliance == "red") && colorSensor.sensorIsBlue())
+                            ||  ((alliance == "blue") && colorSensor.sensorIsRed())
+            ) {
+                Thread.sleep(200);
+                if (colorSensor.sensorIsBlue()) {
+                    flywheel.setState(Flywheel.FlywheelDirection.OUT);
+                    Thread.sleep(1000);
+                    flywheel.setState(Flywheel.FlywheelDirection.IN);
+                }
+            }
+        }
     }
 }

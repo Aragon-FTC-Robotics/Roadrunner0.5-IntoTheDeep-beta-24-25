@@ -11,13 +11,14 @@ public class Bar {
     Servo barServoLeft;
     Servo barServoRight;
 
-    public enum BarState {TRANSFER, WALL, BUCKET, CLIP2, CLIP1}
+    public enum BarState {TRANSFER, WALL, BUCKET, CLIP2, CLIP1, NEUTRAL}
     double pos;
     double transferpos = 0.948;
     double wallpos = 0.917;
     double bucketpos = 0.287;
     double clip2 = 0.348;
-    double clip1 = 0.181;
+    double clip1 = 0.140;
+    double neutralpos = 0.821;
 
     BarState currentBarState;
 
@@ -26,7 +27,7 @@ public class Bar {
         barServoRight = hm.get(Servo.class, "barRight");
         barServoRight.setDirection(Servo.Direction.REVERSE);
         barServoLeft.setDirection(Servo.Direction.FORWARD);
-        currentBarState = BarState.WALL;
+        currentBarState = BarState.NEUTRAL;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
         switch(currentBarState) {
@@ -45,6 +46,9 @@ public class Bar {
             case CLIP1:
                 setPos(clip1);
                 break;
+            case NEUTRAL:
+                setPos(neutralpos);
+                break;
             default:
                 setState(BarState.WALL);
                 break;
@@ -61,6 +65,7 @@ public class Bar {
             case WALL: return "wall";
             case CLIP2: return "clip2";
             case CLIP1: return "clip1";
+            case NEUTRAL: return "neutral";
             default: return "Default!! (transfer)";
         }
     }

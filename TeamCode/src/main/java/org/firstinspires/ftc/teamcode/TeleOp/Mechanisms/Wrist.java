@@ -9,13 +9,13 @@ public class Wrist {
     final double transfer = 0.022;
     final double bucket = 1.000;
     final double wall = 0.419;
-    final double clip1 = 0.932;
+    final double clip1 = 0.720;
     final double clip2 = 0.552;
 
     double speed;
 
     public enum wristState {TRANSFER, BUCKET, WALL, CLIP1, CLIP2}
-    wristState currentWristState = wristState.WALL;
+    wristState currentWristState = wristState.TRANSFER;
 
     public void init(HardwareMap hm) {
         wrist = hm.get(Servo.class, "wrist");

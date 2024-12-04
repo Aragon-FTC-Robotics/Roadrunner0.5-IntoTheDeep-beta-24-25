@@ -57,6 +57,7 @@ public class FullTeleopRed extends LinearOpMode {
 
         while(opModeIsActive() && !isStopRequested()) {
             bar.Loop(gp1, gp2);
+            colorsensor.Loop(gp1, gp2);
             claw.Loop(gp1, gp2);
             drivetrain.Loop(gp1, gp2);
             extendo.Loop(gp1, gp2);
@@ -67,10 +68,16 @@ public class FullTeleopRed extends LinearOpMode {
             actionHandler.Loop(gp1, gp2);
             telemetry.addData("barposL", bar.getPos());
             telemetry.addData("bello", bar.getBarState());
-            telemetry.addData("Extendopos1", extendo.getPos());
-            telemetry.addData("Extendopos2", extendo.getExtendopos());
+            telemetry.addData("get extendo Intpos", extendo.getPos());
+            telemetry.addData("get extendo enoder pos", extendo.getExtendopos());
             telemetry.addData("slideLpos", slides.getLPos());
             telemetry.addData("slideRpos", slides.getRPos());
+            telemetry.addData("colrosenser R", colorsensor.getColor()[0]);
+            telemetry.addData("colrosenser G", colorsensor.getColor()[1]);
+            telemetry.addData("colrosenser B", colorsensor.getColor()[2]);
+            telemetry.addData("is REd?", colorsensor.sensorIsRed());
+            telemetry.addData("is brue?", colorsensor.sensorIsBlue());
+            telemetry.addData("is yelo?", colorsensor.sensorIsYellow());
             telemetry.update();
         }
     }

@@ -18,6 +18,8 @@ public class Extendo {
     final int max = 600; //580 mm extendo
     final int min = -200;
     final int mid = (int)Math.round((max+min)*0.5);
+    boolean leftLastPressed = false;
+    boolean rightLastPressed = false;
     public void init(HardwareMap hm) {
         controller = new PIDController(p,i,d);
         extendoMotor = hm.get(DcMotorEx.class, "extendo");
@@ -26,7 +28,7 @@ public class Extendo {
 
         extendoMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         extendoMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        pos = 0;
+        pos = min;
     }
 
     public void Loop(Gamepad gp1, Gamepad gp2) {
@@ -61,7 +63,7 @@ public class Extendo {
 
 
     public double getPos() {
-        return pos;
+        return (int) Math.round(pos);
     }
     public double getExtendopos() {return extendoMotor.getCurrentPosition();}
 }

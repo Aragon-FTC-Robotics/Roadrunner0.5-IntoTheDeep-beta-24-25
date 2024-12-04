@@ -6,15 +6,18 @@ import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.SwitchableLight;
 
+import java.util.Objects;
+
 public class Colorsensor {
     NormalizedColorSensor colorSensor;
-    NormalizedRGBA color;
-    float gain = (float) 2.5;
-    public float[] redHigher = {255,50,50}; //CLOSER TO WHITE
+    NormalizedRGBA sensedcolors;
+    public float[] color = {0,0,0}; //defaut
+    float gain = 30.0f;
+    public float[] redHigher = {255,125,125}; //CLOSER TO WHITE
     public float[] redLower = {100,0,0}; //CLOSER TO BLACK
-    public float[] yellowHigher = {255,255,50}; //etc
+    public float[] yellowHigher = {255,255,125}; //etc
     public float[] yellowLower = {100,100,0};
-    public float[] blueHigher = {50,50,255};
+    public float[] blueHigher = {125,125,255};
     public float[] blueLower = {0,0,100};
     public void init(HardwareMap hm) {
         colorSensor = hm.get(NormalizedColorSensor.class, "sensor_color");
@@ -25,24 +28,25 @@ public class Colorsensor {
 
     }
     public void Loop(Gamepad gp1, Gamepad gp2){
-        color = colorSensor.getNormalizedColors();
+        sensedcolors = colorSensor.getNormalizedColors();
+        color = Objects.nonNull(sensedcolors) ? new float[] {255*sensedcolors.red,255*sensedcolors.green,255*sensedcolors.blue} : new float[] {0,0,0};
     }
     public float[] getColor() {
-        return new float[] {color.red,color.green,color.blue};
+        return new float[] {color[0],color[1],color[2]};
     }
     public boolean sensorIsRed() {
-        return colorInRange(new float[] {color.red,color.green,color.blue},redLower,redHigher);
+        return colorInRange(color,redLower,redHigher);
     }
     public boolean sensorIsYellow() {
-        return colorInRange(new float[] {color.red,color.green,color.blue},yellowLower,yellowHigher);
+        return colorInRange(color,yellowLower,yellowHigher);
     }
     public boolean sensorIsBlue() {
-        return colorInRange(new float[] {color.red,color.green,color.blue},blueLower,blueHigher);
+        return colorInRange(color,blueLower,blueHigher);
     }
     public boolean colorInRange(float[] color, float[] min, float[] max) {
         return
-                min[0] < color[0] && color[0] < max[0] && //Red is within min and max range
-                min[1] < color[1] && color[1] < max[1] && //Green is within min and max range
-                min[2] < color[2] && color[2] < max[2];   //brue is sithin the range,
+                min[0] <= color[0] && color[0] <= max[0] && //Red is within min and max range
+                min[1] <= color[1] && color[1] <= max[1] && //Green is within min and max range
+                min[2] <= color[2] && color[2] <= max[2];   //brue is sithin the range,
     }
 }
