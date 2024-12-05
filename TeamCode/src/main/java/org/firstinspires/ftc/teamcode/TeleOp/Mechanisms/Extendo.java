@@ -15,9 +15,10 @@ public class Extendo {
     double pos;
     double speed = 15;
     double pid, power;
-    final int max = 600; //580 mm extendo
-    final int min = -150;
-    final int mid = (int)Math.round((max+min)*0.5);
+    public final int max = 600; //580 mm extendo
+    public final int min = -150;
+    public final int MED = 300;
+    public final int mid = (int)Math.round((max+min)*0.5);
     boolean leftLastPressed = false;
     boolean rightLastPressed = false;
     public void init(HardwareMap hm) {
@@ -61,7 +62,7 @@ public class Extendo {
         //extendoMotor.setPower(0.8);
     }
 
-
+    public void setPos(double pos) {this.pos = pos;}
     public double getPos() {
         return (int) Math.round(pos);
     }

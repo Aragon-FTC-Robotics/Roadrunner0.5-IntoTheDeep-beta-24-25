@@ -23,11 +23,17 @@ public class ActionHandler {
 
     enum ActionState {
         IDLE,
-        TRANSFER_STAGE_1,
-        TRANSFER_STAGE_2,
-        TRANSFER_STAGE_3,
-        CLIP2_STAGE_1,
-        CLIP2_STAGE_2
+        TRANSFER_STAGE_1, //intakewrist in BEFORE, stage1: claw close when wait is done
+        TRANSFER_STAGE_2, //flywheel out
+        TRANSFER_STAGE_3, //barwrist transfer, flywheel stop
+        TRANSFER_STAGE_4, //clawopen
+        CLIP2_STAGE_1, //delay to claw open
+        HIGHBUCKET_STAGE_1, //slides up BEFORE
+        HIGHBUCKET_STAGE_2, //barwrist bucket
+//        HIGHBUCKET_STAGE_3 //claw open and extendo medium
+        //slides up -> stage 1 -> barwrist -> stage2 ... etc
+        //each case statement has a delay and then runs an action after....
+        SLIDESDOWN_STAGE_1 //
     }
 
     public void init(Slides s, Extendo e, Bar b, Wrist w, Flywheel f, Claw c, IntakeWrist iw, Colorsensor cs, String alliance) {
@@ -64,12 +70,12 @@ public class ActionHandler {
 
         // Bucket high
         if (gp2.dpad_up) {
-            highBucket();
+            startHighBucket();
         }
 
         // Reset slides and arm
         if (gp2.dpad_down) {
-            resetSlidesArm();
+            startSlidesDown();
         }
 
         // Clip up
@@ -89,10 +95,6 @@ public class ActionHandler {
             wrist.setState(Wrist.wristState.WALL);
         }
 
-        // Transfer
-        if (gp1.b) {
-            startTransfer();
-        }
 
         // Intake wrist down
         if (gp1.x) {
@@ -123,6 +125,12 @@ public class ActionHandler {
                     flywheel.setState(Flywheel.FlywheelDirection.STOP);
                     bar.setState(Bar.BarState.TRANSFER);
                     wrist.setState(Wrist.wristState.TRANSFER);
+                    currentActionState = ActionState.TRANSFER_STAGE_4;
+                    timer.reset();
+                }
+                break;
+            case TRANSFER_STAGE_4:
+                if (elapsedMs >= 250) {
                     claw.setState(Claw.ClawState.OPEN);
                     currentActionState = ActionState.IDLE;
                 }
@@ -133,11 +141,36 @@ public class ActionHandler {
                     currentActionState = ActionState.IDLE;
                 }
                 break;
+            case HIGHBUCKET_STAGE_1:
+                if (elapsedMs >= 700) {
+                    bar.setState(Bar.BarState.BUCKET);
+                    wrist.setState(Wrist.wristState.BUCKET);
+                    currentActionState = ActionState.IDLE;
+                }
+                break;
+            case SLIDESDOWN_STAGE_1:
+                if (elapsedMs >= 2000) {
+                    extendo.setPos(extendo.min);
+                    currentActionState = ActionState.IDLE;
+                }
+                break;
             default:
+                currentActionState = ActionState.IDLE;
                 break;
         }
     }
-
+    private void startHighBucket() {
+        slides.setState(Slides.slideState.HIGH);
+        currentActionState = ActionState.HIGHBUCKET_STAGE_1;
+        timer.reset();
+    }
+    private void startSlidesDown() {
+        extendo.setPos(extendo.MED);
+        bar.setState(Bar.BarState.NEUTRAL);
+        wrist.setState(Wrist.wristState.TRANSFER);
+        currentActionState = ActionState.SLIDESDOWN_STAGE_1;
+        timer.reset();
+    }
     private void startTransfer() {
         claw.setState(Claw.ClawState.CLOSE);
         currentActionState = ActionState.TRANSFER_STAGE_1;
@@ -176,15 +209,7 @@ public class ActionHandler {
         }
     }
 
-    public void highBucket() {
-        slides.setState(Slides.slideState.HIGH);
-        bar.setState(Bar.BarState.BUCKET);
-        wrist.setState(Wrist.wristState.BUCKET);
-    }
 
-    public void resetSlidesArm() {
-        slides.setState(Slides.slideState.GROUND);
-        bar.setState(Bar.BarState.WALL);
-        wrist.setState(Wrist.wristState.TRANSFER);
-    }
+
+
 }
