@@ -39,7 +39,7 @@ public class Drivetrain {
 
         double y = gp1.left_stick_y; // Remember, Y stick value is reversed
         double x = -gp1.left_stick_x * 1.1; // Counteract imperfect strafing
-        double rx = -gp1.right_stick_x;
+        double rx = -gp1.right_stick_x * 0.8;
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
         double frontRightPower = (y - x - rx) / denominator;
@@ -48,12 +48,12 @@ public class Drivetrain {
         double backLeftPower = (y - x + rx) / denominator;
 
         if(slowMode == false) {
-            minSpeed = -0.8;
-            maxSpeed = 0.8;
+            minSpeed = -0.6;
+            maxSpeed = 0.6;
 
         } else if(slowMode == true) {
-            minSpeed = -0.5;
-            maxSpeed = 0.5;
+            minSpeed = -0.3;
+            maxSpeed = 0.3;
         }
 
         if (gp2.x || gp2.dpad_up || gp2.dpad_right || gp2.y || gp2.right_bumper){
