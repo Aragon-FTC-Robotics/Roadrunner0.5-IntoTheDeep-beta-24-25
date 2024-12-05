@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -14,7 +15,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.IntakeWrist;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
-
+@Disabled
 @TeleOp(name="what if the joker was Blue and yellow", group="Linear OpMode")
 public class FullTeleopBlue extends LinearOpMode {
 

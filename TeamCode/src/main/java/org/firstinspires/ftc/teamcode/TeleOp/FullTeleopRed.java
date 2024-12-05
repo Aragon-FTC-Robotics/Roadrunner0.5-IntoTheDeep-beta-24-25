@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Bar;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Claw;
@@ -28,7 +29,7 @@ public class FullTeleopRed extends LinearOpMode {
     public IntakeWrist intakeWrist = new IntakeWrist();
     public Wrist wrist = new Wrist();
     public ActionHandler actionHandler = new ActionHandler();
-
+    public ElapsedTime timer = new ElapsedTime();
     public Gamepad gp1;
     public Gamepad gp2;
 
@@ -49,6 +50,7 @@ public class FullTeleopRed extends LinearOpMode {
         slides.init(hardwareMap);
         wrist.init(hardwareMap);
         actionHandler.init(slides,extendo,bar,wrist,flywheel,claw,intakeWrist,colorsensor, "red");
+        timer.reset();
 
         gp1 = gamepad1;
         gp2 = gamepad2;
@@ -78,6 +80,7 @@ public class FullTeleopRed extends LinearOpMode {
             telemetry.addData("is REd?", colorsensor.sensorIsRed());
             telemetry.addData("is brue?", colorsensor.sensorIsBlue());
             telemetry.addData("is yelo?", colorsensor.sensorIsYellow());
+            telemetry.addData("time", timer.time());
             telemetry.update();
         }
     }
