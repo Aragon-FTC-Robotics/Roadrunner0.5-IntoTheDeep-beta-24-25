@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.TeleOp.Mechanisms;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
-
+@Config
 public class Drivetrain {
     DcMotor rightFront;
     DcMotor leftFront;
@@ -13,7 +14,7 @@ public class Drivetrain {
     DcMotor leftRear;
     double minSpeed = -0.8;
     double maxSpeed = 0.8;
-
+    static double MICROSPEED = 0.5;
     boolean slowMode = false;
     public void init(HardwareMap hm){
         rightFront = hm.get(DcMotor.class, "rightFront");
@@ -39,9 +40,21 @@ public class Drivetrain {
 
         double y = gp1.left_stick_y; // Remember, Y stick value is reversed
         double x = -gp1.left_stick_x * 1.1; // Counteract imperfect strafing
-        double rx = -gp1.right_stick_x * 0.8;
+        double rx = -gp1.right_stick_x * 1.0;
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+        if (gp1.dpad_up) {
+            x = 0; y = MICROSPEED;
+        }
+        if (gp1.dpad_down) {
+            x = 0; y = -MICROSPEED;
+        }
+        if (gp1.dpad_right) {
+            x = MICROSPEED; y = 0;
+        }
+        if (gp1.dpad_left) {
+            x = -MICROSPEED; y = 0;
+        }
         double frontRightPower = (y - x - rx) / denominator;
         double backRightPower = (y + x - rx) / denominator;
         double frontLeftPower = (y + x + rx) / denominator;
@@ -54,12 +67,6 @@ public class Drivetrain {
         } else if(slowMode == true) {
             minSpeed = -0.3;
             maxSpeed = 0.3;
-        }
-
-        if (gp2.x || gp2.dpad_up || gp2.dpad_right || gp2.y || gp2.right_bumper){
-            slowModeON();
-        } else if (gp2.b || gp2.y || gp2.a || gp2.dpad_down) {
-            slowModeOFF();
         }
 
         rightFront.setPower(Range.clip(frontRightPower, minSpeed, maxSpeed));

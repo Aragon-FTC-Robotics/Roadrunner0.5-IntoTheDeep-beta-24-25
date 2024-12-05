@@ -18,7 +18,9 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
 @TeleOp(name="what if the joker was red and yellow", group="Linear OpMode")
 public class FullTeleopRed extends LinearOpMode {
-
+    int loops;
+    double lastTime;
+    double startTime;
     public Bar bar = new Bar();
     public Claw claw = new Claw();
     public Colorsensor colorsensor = new Colorsensor();
@@ -81,6 +83,19 @@ public class FullTeleopRed extends LinearOpMode {
             telemetry.addData("is brue?", colorsensor.sensorIsBlue());
             telemetry.addData("is yelo?", colorsensor.sensorIsYellow());
             telemetry.addData("time", timer.time());
+            long currentTime = System.nanoTime();
+            double instantLoopTime = .000001 * (currentTime - lastTime);
+            double instantHz = 1 / (instantLoopTime / 1000);
+            double averageLoopTime = (.000001 * (currentTime - startTime)) / loops;
+            double averageHz = loops / (averageLoopTime / 1000);
+
+            telemetry.addData("Instantaneous Loop Time", instantLoopTime);
+            telemetry.addData("Instantaneous Loop Hz", instantHz);
+            telemetry.addData("Average Loop Time", averageLoopTime);
+            telemetry.addData("Average Loop Hz", averageHz);
+
+            lastTime = currentTime;
+            loops += 1;
             telemetry.update();
         }
     }
