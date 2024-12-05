@@ -126,7 +126,10 @@ public class ActionHandler {
                             ||  ((alliance == "blue") && colorSensor.sensorIsRed())
             ) {
                 Thread.sleep(200);
-                if (colorSensor.sensorIsBlue()) {
+                if (
+                        ((alliance == "red") && colorSensor.sensorIsBlue())
+                        ||  ((alliance == "blue") && colorSensor.sensorIsRed())
+                ) {
                     flywheel.setState(Flywheel.FlywheelDirection.OUT);
                     Thread.sleep(1000);
                     flywheel.setState(Flywheel.FlywheelDirection.IN);
