@@ -8,15 +8,15 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class BarTest {
     Gamepad gp;
-    Servo barLeft;
+    //Servo barLeft;
     Servo barRight;
 
     double bPos;
     public void init(HardwareMap hm) {
-        barLeft = hm.get(Servo.class, "barLeft");
+    //    barLeft = hm.get(Servo.class, "barLeft");
         barRight = hm.get(Servo.class, "barRight");
         bPos = 0.8;
-        barLeft.setDirection(Servo.Direction.FORWARD);
+    //    barLeft.setDirection(Servo.Direction.FORWARD);
         barRight.setDirection(Servo.Direction.REVERSE);
     }
 
@@ -30,7 +30,7 @@ public class BarTest {
     }
 
     private void moveToPos(double position) {
-        barLeft.setPosition(bPos);
+    //    barLeft.setPosition(bPos);
         barRight.setPosition(bPos);
     }
 
