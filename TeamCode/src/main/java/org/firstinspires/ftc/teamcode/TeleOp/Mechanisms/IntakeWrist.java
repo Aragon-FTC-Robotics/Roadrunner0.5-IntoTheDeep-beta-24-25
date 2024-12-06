@@ -8,8 +8,8 @@ public class IntakeWrist {
     Servo iWrist;
     public enum iwristState {IN, OUT};
     public iwristState currentiWrist = iwristState.IN;
-    public final double INPOS = 0.134;
-    public final double OUTPOS = 0.932;
+    public final double INPOS = 0.055;
+    public final double OUTPOS = 0.884;
     public void init(HardwareMap hm) {
         iWrist = hm.get(Servo.class, "iWrist");
         currentiWrist = iwristState.IN;
