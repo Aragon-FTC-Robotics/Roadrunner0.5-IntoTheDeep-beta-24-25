@@ -56,11 +56,6 @@ public class Drivetrain {
             maxSpeed = 0.3;
         }
 
-        if (gp2.x || gp2.dpad_up || gp2.dpad_right || gp2.y || gp2.right_bumper){
-            slowModeON();
-        } else if (gp2.b || gp2.y || gp2.a || gp2.dpad_down) {
-            slowModeOFF();
-        }
 
         rightFront.setPower(Range.clip(frontRightPower, minSpeed, maxSpeed));
         rightRear.setPower(Range.clip(backRightPower, minSpeed, maxSpeed));

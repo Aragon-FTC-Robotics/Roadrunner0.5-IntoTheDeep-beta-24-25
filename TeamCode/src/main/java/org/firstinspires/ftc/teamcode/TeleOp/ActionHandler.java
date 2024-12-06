@@ -78,27 +78,24 @@ public class ActionHandler {
             startSlidesDown();
         }
 
-        // Clip up
-        if (gp2.b) {
+        if (gp2.x) {
             Clip1();
         }
 
-        // Clip down
         if (gp2.y) {
             startClip2();
         }
 
         // Wall pickup
-        if (gp2.a) {
+        if (gp2.b) {
             claw.setState(Claw.ClawState.OPEN);
             bar.setState(Bar.BarState.WALL);
             wrist.setState(Wrist.wristState.WALL);
         }
-
-
-        // Intake wrist down
-        if (gp1.x) {
-            intakeWrist.setState(IntakeWrist.iwristState.OUT);
+        if (gp2.a) {
+            claw.setState(Claw.ClawState.OPEN);
+            bar.setState(Bar.BarState.TRANSFER);
+            wrist.setState(Wrist.wristState.TRANSFER);
         }
     }
 
@@ -121,7 +118,7 @@ public class ActionHandler {
                 }
                 break;
             case TRANSFER_STAGE_3:
-                if (elapsedMs >= 250) {
+                if (elapsedMs >= 500) {
                     flywheel.setState(Flywheel.FlywheelDirection.STOP);
                     bar.setState(Bar.BarState.TRANSFER);
                     wrist.setState(Wrist.wristState.TRANSFER);
@@ -168,6 +165,7 @@ public class ActionHandler {
         extendo.setPos(extendo.MED);
         bar.setState(Bar.BarState.NEUTRAL);
         wrist.setState(Wrist.wristState.TRANSFER);
+        slides.setState(Slides.slideState.GROUND);
         currentActionState = ActionState.SLIDESDOWN_STAGE_1;
         timer.reset();
     }
