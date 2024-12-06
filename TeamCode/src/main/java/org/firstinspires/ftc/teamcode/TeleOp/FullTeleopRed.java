@@ -32,7 +32,8 @@ public class FullTeleopRed extends LinearOpMode {
     public ElapsedTime timer = new ElapsedTime();
     public Gamepad gp1;
     public Gamepad gp2;
-
+    double looptime = 0.000;
+    double highestTime = 0.000;
     @Override
     public void waitForStart() {
         super.waitForStart();
@@ -58,6 +59,7 @@ public class FullTeleopRed extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive() && !isStopRequested()) {
+            looptime = timer.milliseconds();
             bar.Loop(gp1, gp2);
             colorsensor.Loop(gp1, gp2);
             claw.Loop(gp1, gp2);
@@ -68,20 +70,22 @@ public class FullTeleopRed extends LinearOpMode {
             slides.Loop(gp1, gp2);
             wrist.Loop(gp1, gp2);
             actionHandler.Loop(gp1, gp2);
-            telemetry.addData("barposL", bar.getPos());
-            telemetry.addData("bello", bar.getBarState());
-            telemetry.addData("get extendo Intpos", extendo.getPos());
-            telemetry.addData("get extendo enoder pos", extendo.getExtendopos());
+            telemetry.addData("Last Commanded Bar Pos", bar.getPos());
+            telemetry.addData("BARSTATE:    ", bar.getBarState());
+            telemetry.addData("Extendo intpos", extendo.getPos());
+            telemetry.addData("Extendo encoder pos", extendo.getExtendopos());
             telemetry.addData("slideLpos", slides.getLPos());
             telemetry.addData("slideRpos", slides.getRPos());
-            telemetry.addData("colrosenser R", colorsensor.getColor()[0]);
-            telemetry.addData("colrosenser G", colorsensor.getColor()[1]);
-            telemetry.addData("colrosenser B", colorsensor.getColor()[2]);
             telemetry.addData("is REd?", colorsensor.sensorIsRed());
             telemetry.addData("is brue?", colorsensor.sensorIsBlue());
             telemetry.addData("is yelo?", colorsensor.sensorIsYellow());
-            telemetry.addData("time", timer.time());
+            telemetry.addData("Looptime", looptime);
+            telemetry.addData("Highest loop time", highestTime);
+            if (looptime > highestTime) {
+                highestTime = looptime;
+            }
             telemetry.update();
+            timer.reset();
         }
     }
 }

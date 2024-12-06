@@ -33,7 +33,8 @@ public class ActionHandler {
 //        HIGHBUCKET_STAGE_3 //claw open and extendo medium
         //slides up -> stage 1 -> barwrist -> stage2 ... etc
         //each case statement has a delay and then runs an action after....
-        SLIDESDOWN_STAGE_1 //
+        SLIDESDOWN_STAGE_1, //extendo in
+        EJECT_STAGE_1
     }
 
     public void init(Slides s, Extendo e, Bar b, Wrist w, Flywheel f, Claw c, IntakeWrist iw, Colorsensor cs, String alliance) {
@@ -151,10 +152,22 @@ public class ActionHandler {
                     currentActionState = ActionState.IDLE;
                 }
                 break;
+            case EJECT_STAGE_1:
+                if (elapsedMs >= 500) {
+                    claw.setState(Claw.ClawState.CLOSE);
+                    currentActionState = ActionState.IDLE;
+                }
+                break;
             default:
                 currentActionState = ActionState.IDLE;
                 break;
         }
+    }
+    private void startEject() {
+        bar.setState(Bar.BarState.EJECT);
+        wrist.setState(Wrist.wristState.EJECT);
+        currentActionState = ActionState.EJECT_STAGE_1;
+        timer.reset();
     }
     private void startHighBucket() {
         slides.setState(Slides.slideState.HIGH);

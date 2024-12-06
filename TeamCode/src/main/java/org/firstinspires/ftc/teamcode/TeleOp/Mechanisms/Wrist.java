@@ -11,10 +11,10 @@ public class Wrist {
     final double wall = 0.419;
     final double clip1 = 0.720;
     final double clip2 = 0.552;
-
+    final double EJECT = 1.000;
     double speed;
 
-    public enum wristState {TRANSFER, BUCKET, WALL, CLIP1, CLIP2}
+    public enum wristState {TRANSFER, BUCKET, WALL, CLIP1, CLIP2, EJECT}
     wristState currentWristState = wristState.TRANSFER;
 
     public void init(HardwareMap hm) {
@@ -38,6 +38,8 @@ public class Wrist {
                 case BUCKET:
                     wristPos(bucket);
                     break;
+                case EJECT:
+                    wristPos(EJECT);
                 default:
                     wristPos(transfer);
                     break;

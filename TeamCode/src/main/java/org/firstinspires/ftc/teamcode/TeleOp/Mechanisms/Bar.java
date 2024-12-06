@@ -11,7 +11,7 @@ public class Bar {
     //Servo barServoLeft;
     Servo barServoRight;
 
-    public enum BarState {TRANSFER, WALL, BUCKET, CLIP2, CLIP1, NEUTRAL}
+    public enum BarState {TRANSFER, WALL, BUCKET, CLIP2, CLIP1, NEUTRAL, EJECT}
     double pos;
     double transferpos = 0.948;
     double wallpos = 0.917;
@@ -19,7 +19,7 @@ public class Bar {
     double clip2 = 0.348;
     double clip1 = 0.140;
     double neutralpos = 0.821;
-
+    final double EJECT = 0.000;
     BarState currentBarState;
 
     public void init(HardwareMap hm) {
@@ -49,6 +49,9 @@ public class Bar {
             case NEUTRAL:
                 setPos(neutralpos);
                 break;
+            case EJECT:
+                setPos(EJECT);
+                break;
             default:
                 setState(BarState.WALL);
                 break;
@@ -66,6 +69,7 @@ public class Bar {
             case CLIP2: return "clip2";
             case CLIP1: return "clip1";
             case NEUTRAL: return "neutral";
+            case EJECT: return "ejecting";
             default: return "Default!! (transfer)";
         }
     }
