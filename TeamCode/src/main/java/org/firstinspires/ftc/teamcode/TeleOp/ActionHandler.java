@@ -34,7 +34,9 @@ public class ActionHandler {
         //slides up -> stage 1 -> barwrist -> stage2 ... etc
         //each case statement has a delay and then runs an action after....
         SLIDESDOWN_STAGE_1, //extendo in
-        EJECT_STAGE_1
+        EJECT_STAGE_1,
+        TUAH_STAGE_1, //flywehl out
+        TUAH_STAGE_2 //wheel STOP
     }
 
     public void init(Slides s, Extendo e, Bar b, Wrist w, Flywheel f, Claw c, IntakeWrist iw, Colorsensor cs, String alliance) {
@@ -67,6 +69,12 @@ public class ActionHandler {
         // Intake wrist out
         if (gp1.right_bumper) {
             intakeWrist.setState(IntakeWrist.iwristState.OUT);
+        }
+        if (gp1.left_trigger > 0.5) {
+            Hawk();
+        }
+        if (gp1.right_trigger < 0.5) {
+            startTuah();
         }
 
         // Bucket high
@@ -158,6 +166,19 @@ public class ActionHandler {
                     currentActionState = ActionState.IDLE;
                 }
                 break;
+            case TUAH_STAGE_1:
+                if (elapsedMs >= 500) {
+                    flywheel.setState(Flywheel.FlywheelDirection.OUT);
+                    currentActionState = ActionState.TUAH_STAGE_2;
+                    timer.reset();
+                }
+                break;
+            case TUAH_STAGE_2:
+                if (elapsedMs >= 1000) {
+                    flywheel.setState(Flywheel.FlywheelDirection.STOP);
+                    currentActionState = ActionState.IDLE;
+                }
+                break;
             default:
                 currentActionState = ActionState.IDLE;
                 break;
@@ -167,6 +188,14 @@ public class ActionHandler {
         bar.setState(Bar.BarState.EJECT);
         wrist.setState(Wrist.wristState.EJECT);
         currentActionState = ActionState.EJECT_STAGE_1;
+        timer.reset();
+    }
+    private void Hawk() {
+        intakeWrist.setState(IntakeWrist.iwristState.IN);
+    }
+    private void startTuah() {
+        intakeWrist.setState(IntakeWrist.iwristState.OUT);
+        currentActionState = ActionState.TUAH_STAGE_1;
         timer.reset();
     }
     private void startHighBucket() {

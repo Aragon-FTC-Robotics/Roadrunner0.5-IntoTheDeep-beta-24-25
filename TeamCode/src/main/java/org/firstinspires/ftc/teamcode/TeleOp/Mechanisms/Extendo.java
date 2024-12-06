@@ -38,13 +38,11 @@ public class Extendo {
 
 //        if(gp2.touchpad_finger_1){pos = (gp2.touchpad_finger_1_x*mid + mid);}
 
-        if (gp1.left_bumper){
+        if (gp1.left_bumper || (gp1.left_trigger>0.5)){
             pos = min;
-        } else if (gp1.right_bumper) {
+        } else if (gp1.right_bumper || (gp1.right_trigger>0.5)) {
             pos = max;
         }
-
-        pos += (speed*(gp1.left_trigger - gp1.right_trigger));
         if (pos>max) {
             pos=max;
         }
