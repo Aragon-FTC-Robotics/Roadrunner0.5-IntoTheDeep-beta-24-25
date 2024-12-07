@@ -33,13 +33,13 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
                 .addTemporalMarker(() -> {})
 
                 //got to clip
-                .lineToConstantHeading(new Vector2d(-5, -35))
+                .lineToConstantHeading(new Vector2d(-5, -34))
                 .waitSeconds(1)
 
                 //clip #1
 
                 .setTangent(Math.toRadians(-65))
-                .splineToSplineHeading(new Pose2d(31, -41.4, Math.toRadians(30)),Math.toRadians(35)) //extendo to sample1
+                .splineToSplineHeading(new Pose2d(31, -41.4, Math.toRadians(45)),Math.toRadians(50)) //extendo to sample1
 
                 //extendo to sample #1
 
@@ -50,7 +50,7 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
 
                 //extendo to sample #2
                 .setTangent(Math.toRadians(15))
-                .splineToSplineHeading(new Pose2d(38.8, -36.8, Math.toRadians(25)),Math.toRadians(15)) //extnedo to saple2
+                .splineToSplineHeading(new Pose2d(38.8, -36.8, Math.toRadians(40)),Math.toRadians(30)) //extnedo to saple2
                 .waitSeconds(1)
                 //dump in Observation
                 .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-50)))
@@ -58,7 +58,7 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
 
                 //extendo to sample #3
                 .setTangent(Math.toRadians(0))
-                .splineToSplineHeading(new Pose2d(38.8, -36.8, Math.toRadians(25)),Math.toRadians(15))
+                .splineToSplineHeading(new Pose2d(38.8, -36.8, Math.toRadians(30)),Math.toRadians(25))
                 .waitSeconds(1)
 
                 //dump in Observation
@@ -67,42 +67,42 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
 
                 //go to wall to pick up clip #2
                 .setTangent(Math.toRadians(-100))
-                .splineToSplineHeading(new Pose2d(35, -58, Math.toRadians(-90)),Math.toRadians(-90))
+                .lineToLinearHeading(new Pose2d(35, -57, Math.toRadians(-90)))
                 .waitSeconds(1)
-                .lineToConstantHeading(new Vector2d(5, -35))
+                .lineToLinearHeading(new Pose2d(5,-39, Math.toRadians(90)))
                 //clipping
                 .waitSeconds(1)
-                //go to wall to pick up clip #3
-                .lineToConstantHeading(new Vector2d(35,-58))
-
-                //move to clip
-                .lineToConstantHeading(new Vector2d(5, -35))
-                //clipping
-                .waitSeconds(1)
-
-
-                //go to wall to pick up clip #3
-                .lineToConstantHeading(new Vector2d(35,-58))
-                .waitSeconds(1)
-                .lineToConstantHeading(new Vector2d(5, -35))
-                //clipping
-                .waitSeconds(1)
-
-                //go to wall to pick up clip #4
-                .lineToConstantHeading(new Vector2d(35,-58))
-                .waitSeconds(1)
-                .lineToConstantHeading(new Vector2d(5, -35))
-                //clipping
-                .waitSeconds(1)
-                //go to wall to pick up clip #5
-                .lineToConstantHeading(new Vector2d(35,-58))
-                .waitSeconds(1)
-                .lineToConstantHeading(new Vector2d(5, -35))
-                //clipping
-                .waitSeconds(1)
+//                //go to wall to pick up clip #3
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//
+//                //move to clip
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
+//
+//
+//                //go to wall to pick up clip #3
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//                .waitSeconds(1)
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
+//
+//                //go to wall to pick up clip #4
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//                .waitSeconds(1)
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
+//                //go to wall to pick up clip #5
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//                .waitSeconds(1)
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
 
                 //park @ observation
-                .lineToSplineHeading(new Pose2d(35, -60, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(35, -60, Math.toRadians(90)))
                 .build();
         waitForStart();
 
