@@ -17,7 +17,7 @@ public class ActionHandler {
     private Colorsensor colorSensor;
     private boolean intaking = false;
     private String alliance;
-
+    int telemybaby = 0;
     private ElapsedTime timer = new ElapsedTime();
     private ActionState currentActionState = ActionState.IDLE;
 
@@ -27,7 +27,8 @@ public class ActionHandler {
         TRANSFER_STAGE_2, //flywheel out
         TRANSFER_STAGE_3, //barwrist transfer, flywheel stop
         TRANSFER_STAGE_4, //clawopen
-        CLIP2_STAGE_1, //delay to claw open
+        CLIP2_STAGE_1, //delay to wrist move
+        CLIP2_STAGE_2, //delay to claw open
         HIGHBUCKET_STAGE_1, //slides up BEFORE
         HIGHBUCKET_STAGE_2, //barwrist bucket
 //        HIGHBUCKET_STAGE_3 //claw open and extendo medium
@@ -36,7 +37,8 @@ public class ActionHandler {
         SLIDESDOWN_STAGE_1, //extendo in
         EJECT_STAGE_1,
         TUAH_STAGE_1, //flywehl out
-        TUAH_STAGE_2 //wheel STOP
+        TUAH_STAGE_2, //wheel STOP
+        RESETSTATE
     }
 
     public void init(Slides s, Extendo e, Bar b, Wrist w, Flywheel f, Claw c, IntakeWrist iw, Colorsensor cs, String alliance) {
@@ -58,6 +60,7 @@ public class ActionHandler {
         if (gp1.y && !intaking) {
             intaking = true;
             flywheel.setState(Flywheel.FlywheelDirection.IN);
+            setIntakeWristOutButCool();
         }
         intakecheck();
 
@@ -68,18 +71,21 @@ public class ActionHandler {
 
         // Intake wrist out
         if (gp1.right_bumper) {
-            intakeWrist.setState(IntakeWrist.iwristState.OUT);
+            intakeWrist.setState(IntakeWrist.iwristState.IN);
         }
         if (gp1.left_trigger > 0.5) {
             Hawk();
         }
-        if (gp1.right_trigger < 0.5) {
+        if (gp1.right_trigger > 0.5) {
             startTuah();
         }
 
         // Bucket high
         if (gp2.dpad_up) {
             startHighBucket();
+        }
+        if (gp1.dpad_down) {
+            resetExtendo();
         }
 
         // Reset slides and arm
@@ -94,6 +100,12 @@ public class ActionHandler {
         if (gp2.y) {
             startClip2();
         }
+        if (gp1.touchpad_finger_1 && gp1.touchpad_finger_2) {
+            intakeWrist.setState(IntakeWrist.iwristState.IN);
+            flywheel.setState(Flywheel.FlywheelDirection.STOP);
+            gp1.rumbleBlips(3);
+            gp2.rumbleBlips(3);
+        }
 
         // Wall pickup
         if (gp2.b) {
@@ -102,8 +114,8 @@ public class ActionHandler {
             wrist.setState(Wrist.wristState.WALL);
         }
         if (gp2.a) {
-            claw.setState(Claw.ClawState.OPEN);
-            bar.setState(Bar.BarState.TRANSFER);
+            claw.setState(Claw.ClawState.CLOSE);
+            bar.setState(Bar.BarState.NEUTRAL);
             wrist.setState(Wrist.wristState.TRANSFER);
         }
     }
@@ -114,7 +126,7 @@ public class ActionHandler {
         switch (currentActionState) {
             case TRANSFER_STAGE_1:
                 if (elapsedMs >= 500) {
-                    intakeWrist.setState(IntakeWrist.iwristState.IN);
+                    extendo.setPos(extendo.min);
                     currentActionState = ActionState.TRANSFER_STAGE_2;
                     timer.reset();
                 }
@@ -142,11 +154,21 @@ public class ActionHandler {
                 }
                 break;
             case CLIP2_STAGE_1:
+                if (elapsedMs >= 20) {
+                    wrist.setState(Wrist.wristState.CLIP2);
+                    currentActionState = ActionState.CLIP2_STAGE_2;
+                    telemybaby++;
+                    timer.reset();
+                }
+                break;
+            case CLIP2_STAGE_2:
                 if (elapsedMs >= 200) {
                     claw.setState(Claw.ClawState.OPEN);
                     currentActionState = ActionState.IDLE;
+                    extendo.setPos(extendo.min);
                 }
                 break;
+
             case HIGHBUCKET_STAGE_1:
                 if (elapsedMs >= 700) {
                     bar.setState(Bar.BarState.BUCKET);
@@ -167,15 +189,21 @@ public class ActionHandler {
                 }
                 break;
             case TUAH_STAGE_1:
-                if (elapsedMs >= 500) {
+                if (elapsedMs >= 2000) {
                     flywheel.setState(Flywheel.FlywheelDirection.OUT);
                     currentActionState = ActionState.TUAH_STAGE_2;
                     timer.reset();
                 }
                 break;
             case TUAH_STAGE_2:
-                if (elapsedMs >= 1000) {
+                if (elapsedMs >= 500) {
                     flywheel.setState(Flywheel.FlywheelDirection.STOP);
+                    currentActionState = ActionState.IDLE;
+                }
+                break;
+            case RESETSTATE:
+                if (elapsedMs >= 1000) {
+                    extendo.DANGEROUS_RESET_ENCODERS();
                     currentActionState = ActionState.IDLE;
                 }
                 break;
@@ -194,7 +222,7 @@ public class ActionHandler {
         intakeWrist.setState(IntakeWrist.iwristState.IN);
     }
     private void startTuah() {
-        intakeWrist.setState(IntakeWrist.iwristState.OUT);
+        setIntakeWristOutButCool();
         currentActionState = ActionState.TUAH_STAGE_1;
         timer.reset();
     }
@@ -212,14 +240,18 @@ public class ActionHandler {
         timer.reset();
     }
     private void startTransfer() {
+        bar.setState(Bar.BarState.NEUTRAL);
+        wrist.setState(Wrist.wristState.TRANSFER);
         claw.setState(Claw.ClawState.CLOSE);
+        intakeWrist.setState(IntakeWrist.iwristState.IN);
         currentActionState = ActionState.TRANSFER_STAGE_1;
         timer.reset();
     }
 
     private void startClip2() {
         bar.setState(Bar.BarState.CLIP2);
-        wrist.setState(Wrist.wristState.CLIP2);
+        slides.setState(Slides.slideState.GROUND);
+        extendo.setPos(extendo.MED);
         currentActionState = ActionState.CLIP2_STAGE_1;
         timer.reset();
     }
@@ -227,6 +259,8 @@ public class ActionHandler {
     public void Clip1() {
         bar.setState(Bar.BarState.CLIP1);
         wrist.setState(Wrist.wristState.CLIP1);
+        slides.setState(Slides.slideState.MED);
+        intakeWrist.setState(IntakeWrist.iwristState.IN);
     }
 
     public void intakecheck() {
@@ -248,8 +282,24 @@ public class ActionHandler {
             }
         }
     }
-
-
+    public int getBaby() {
+        return telemybaby;
+    }
+    public String getActionState() {
+        return "" + currentActionState;
+    }
+    public void setIntakeWristOutButCool() {
+        if (extendo.getPos() > 400) {
+            intakeWrist.setState(IntakeWrist.iwristState.SUPEROUT);
+        } else {
+            intakeWrist.setState(IntakeWrist.iwristState.OUT);
+        }
+    }
+    private void resetExtendo() {
+        extendo.setPos(-700);
+        currentActionState = ActionState.RESETSTATE;
+        timer.reset();
+    }
 
 
 }

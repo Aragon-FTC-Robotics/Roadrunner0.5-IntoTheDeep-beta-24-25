@@ -15,7 +15,7 @@ public class Colorsensor {
     float gain = 30.0f;
     public float[] redHigher = {255,125,125}; //CLOSER TO WHITE
     public float[] redLower = {100,0,0}; //CLOSER TO BLACK
-    public float[] yellowHigher = {255,255,125}; //etc
+    public float[] yellowHigher = {255,255,200}; //etc
     public float[] yellowLower = {100,100,0};
     public float[] blueHigher = {125,125,255};
     public float[] blueLower = {0,0,100};

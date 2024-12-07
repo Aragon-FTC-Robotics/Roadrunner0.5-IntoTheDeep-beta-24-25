@@ -38,7 +38,7 @@ public class Extendo {
 
 //        if(gp2.touchpad_finger_1){pos = (gp2.touchpad_finger_1_x*mid + mid);}
 
-        if (gp1.left_bumper || (gp1.left_trigger>0.5)){
+        if (gp1.left_trigger>0.5){
             pos = min;
         } else if (gp1.right_bumper || (gp1.right_trigger>0.5)) {
             pos = max;
@@ -65,4 +65,8 @@ public class Extendo {
         return (int) Math.round(pos);
     }
     public double getExtendopos() {return extendoMotor.getCurrentPosition();}
+    public void DANGEROUS_RESET_ENCODERS() {
+        extendoMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pos = min;
+    }
 }

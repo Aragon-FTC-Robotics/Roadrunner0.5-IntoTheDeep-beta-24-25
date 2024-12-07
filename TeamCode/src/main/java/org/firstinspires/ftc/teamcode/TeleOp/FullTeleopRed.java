@@ -57,7 +57,8 @@ public class FullTeleopRed extends LinearOpMode {
         gp2 = gamepad2;
 
         waitForStart();
-
+        timer.reset();
+        highestTime = 0.000;
         while(opModeIsActive() && !isStopRequested()) {
             looptime = timer.milliseconds();
             bar.Loop(gp1, gp2);
@@ -81,6 +82,8 @@ public class FullTeleopRed extends LinearOpMode {
             telemetry.addData("is yelo?", colorsensor.sensorIsYellow());
             telemetry.addData("Looptime", looptime);
             telemetry.addData("Highest loop time", highestTime);
+            telemetry.addData("Baby", actionHandler.getBaby());
+            telemetry.addData("state", actionHandler.getActionState());
             if (looptime > highestTime) {
                 highestTime = looptime;
             }

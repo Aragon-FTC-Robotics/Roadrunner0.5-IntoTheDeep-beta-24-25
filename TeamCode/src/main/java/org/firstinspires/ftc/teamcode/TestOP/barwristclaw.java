@@ -6,9 +6,6 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Drivetrain;
 
-//TRANSFER -- wrist 0.022, bar 0.948, claw close/open
-//HIGH BUCKET -- wrist 1.000, bar 0.287, claw close/open
-//OUTTAKE -- bar 0, claw close, wrist 0
 //New CLIP1 -- wrist 0.748, bar 0.039, claw Close
 //new CLIP2 -- wrist 0.463, bar 0.139, claw open
 //NEW WALL INTAKE -- wrist 0.623, bar 0.815 claw veryopen

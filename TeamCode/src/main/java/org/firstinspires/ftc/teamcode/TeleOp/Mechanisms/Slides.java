@@ -15,9 +15,9 @@ public class Slides {
     DcMotorEx slideLeft;
     DcMotorEx slideRight;
 
-    int groundPos = 0;
+    int groundPos = -30;
     int lowPos = 200;
-    int medPos = 930;
+    int medPos = 1000;
     int highPos = 2600;
     public int target = 0;
     double armPos, power, pid;

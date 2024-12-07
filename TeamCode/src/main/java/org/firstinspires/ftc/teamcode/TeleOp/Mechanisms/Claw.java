@@ -13,7 +13,7 @@ public class Claw {
     ClawState currentClawState;
     public void init(HardwareMap hm) {
         claw1 = hm.get(Servo.class, "claw1");
-        currentClawState = ClawState.OPEN;
+        currentClawState = ClawState.CLOSE;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
         if (gp2.left_bumper) {

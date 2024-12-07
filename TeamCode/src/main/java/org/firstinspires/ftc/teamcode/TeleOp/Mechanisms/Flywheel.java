@@ -18,12 +18,18 @@ public class Flywheel {
                 break;
             case OUT:
                 flywheel.setPower(-0.8);
+                gp1.rumble(Gamepad.RUMBLE_DURATION_CONTINUOUS);
+                gp2.rumble(Gamepad.RUMBLE_DURATION_CONTINUOUS);
                 break;
             case STOP:
                 flywheel.setPower(0);
+                gp1.stopRumble();
+                gp2.stopRumble();
                 break;
             default:
                 flywheel.setPower(0);
+                gp1.rumble(20);
+                gp2.rumble(20);
                 break;
         }
     }
