@@ -301,25 +301,52 @@ public class ActionHandler {
         intakeWrist.setState(IntakeWrist.iwristState.IN);
     }
 
+    private ElapsedTime intakeTimer = new ElapsedTime();
+    private boolean waitingForSecondCheck = false;
+
     public void intakecheck() {
         if (intaking) {
-            boolean correctColor = (alliance.equals("red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow()))
-                    || (alliance.equals("blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow()));
+            // Wait for 300ms before checking again
+            if (intakeTimer.milliseconds() >= 300) {
+                if (!waitingForSecondCheck) {
+                    // First check: Determine if the color is correct
+                    boolean correctColor = (alliance.equals("red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow()))
+                            || (alliance.equals("blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow()));
 
-            if (correctColor) {
-                flywheel.setState(Flywheel.FlywheelDirection.STOP);
-                intaking = false;
-            } else {
-                boolean wrongColor = (alliance.equals("red") && colorSensor.sensorIsBlue())
-                        || (alliance.equals("blue") && colorSensor.sensorIsRed());
+                    if (correctColor) {
+                        // Found the correct color, initiate second check
+                        waitingForSecondCheck = true;
+                        intakeTimer.reset(); // Reset timer for second check
+                    } else {
+                        // Handle wrong color immediately
+                        boolean wrongColor = (alliance.equals("red") && colorSensor.sensorIsBlue())
+                                || (alliance.equals("blue") && colorSensor.sensorIsRed());
 
-                if (wrongColor) {
-                    flywheel.setState(Flywheel.FlywheelDirection.OUT);
-                    intaking = false; // Stops after correcting
+                        if (wrongColor) {
+                            flywheel.setState(Flywheel.FlywheelDirection.OUT); // Reverse flywheel to eject
+                            intaking = false; // Stop intaking
+                        }
+                        intakeTimer.reset(); // Reset timer for the next cycle
+                    }
+                } else {
+                    // Second check after 300ms
+                    boolean correctColor = (alliance.equals("red") && (colorSensor.sensorIsRed() || colorSensor.sensorIsYellow()))
+                            || (alliance.equals("blue") && (colorSensor.sensorIsBlue() || colorSensor.sensorIsYellow()));
+
+                    if (correctColor) {
+                        // Confirmed correct color, stop flywheel and intaking
+                        flywheel.setState(Flywheel.FlywheelDirection.STOP);
+                        intaking = false;
+                    }
+
+                    // Reset state and timer for the next loop
+                    waitingForSecondCheck = false;
+                    intakeTimer.reset();
                 }
             }
         }
     }
+
     public int getBaby() {
         return telemybaby;
     }
