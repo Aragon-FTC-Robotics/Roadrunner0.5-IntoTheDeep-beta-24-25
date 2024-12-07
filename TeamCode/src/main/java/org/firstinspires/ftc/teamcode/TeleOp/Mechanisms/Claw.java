@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
     Servo claw1;
-    final double OPENPOS = 0.691;
-    final double CLOSEPOS = 0.840;
-    final double SUPEROPENPOS = 0.661;
+    public final double OPENPOS = 0.691;
+    public final double CLOSEPOS = 0.840;
+    public final double SUPEROPENPOS = 0.661;
     public enum ClawState {CLOSE, OPEN, SUPEROPEN}
     ClawState currentClawState;
     public void init(HardwareMap hm) {

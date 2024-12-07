@@ -15,10 +15,10 @@ public class Slides {
     DcMotorEx slideLeft;
     DcMotorEx slideRight;
 
-    int groundPos = -30;
-    int lowPos = 200;
-    int medPos = 1000;
-    int highPos = 2600;
+    public final int groundPos = -30;
+    public final int lowPos = 200;
+    public final int medPos = 1000;
+    public final int highPos = 2600;
     public int target = 0;
     double armPos, power, pid;
     public enum slideState {GROUND, CLIP, MED, HIGH}
