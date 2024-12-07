@@ -28,11 +28,11 @@ public class SpecialExtendo {
 
 //        extendoMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        pos = min;
+        extendoMotor.setPower(-0.3);
     }
 
     public void Loop() {
-        extendoMotor.setPower(-0.1);
+        extendoMotor.setPower(-0.3);
         //extendoMotor.setPower(0.8);
     }
 

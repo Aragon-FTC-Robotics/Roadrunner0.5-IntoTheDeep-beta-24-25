@@ -16,8 +16,8 @@ public class Bar {
     public double transferpos = 0.874;
     public double wallpos = 0.817;
     public double bucketpos = 0.264;
-    public double clip2 = 0.430;
-    public double clip1 = 0.430;
+    public double clip2 = 0.441;
+    public double clip1 = 0.441;
     public double neutralpos = 0.718;
     final double EJECT = 0.000;
     BarState currentBarState;

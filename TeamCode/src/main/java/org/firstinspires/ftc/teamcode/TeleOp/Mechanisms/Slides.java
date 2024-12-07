@@ -17,7 +17,7 @@ public class Slides {
 
     public final int groundPos = -30;
     public final int lowPos = 200;
-    public final int medPos = 1200;
+    public final int medPos = 1350;
     public final int highPos = 2600;
     public int target = 0;
     double armPos, power, pid;

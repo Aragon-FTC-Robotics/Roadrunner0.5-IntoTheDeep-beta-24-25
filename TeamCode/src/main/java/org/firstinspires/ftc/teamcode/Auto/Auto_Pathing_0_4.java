@@ -25,7 +25,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="RIGHT SIDE 1+0")
+@Autonomous(name="RIGHT SIDE CLIP 1  AND PUSH, FACING LEFT")
 public class Auto_Pathing_0_4 extends LinearOpMode{
     SampleMecanumDrive drive;
     public void runOpMode() {
@@ -52,38 +52,20 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     //hello2
                 })
-                .addTemporalMarker(()->{
-                    intakeWrist.setPos(intakeWrist.INPOS);
-                    bar.setPos(bar.wallpos);
-                    wrist.setPos(wrist.wall);
-                    claw.setPos(claw.CLOSEPOS);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
-                    bar.setPos(bar.clip1);
-                    wrist.setPos(wrist.clip1);
-                    slides.setPos(slides.medPos);
-                })
-                .waitSeconds(2)
-                .setTangent(Math.toRadians(135))
-                        .splineToSplineHeading(new Pose2d(0, -21.5, Math.toRadians(90)), Math.toRadians(90)) // To clipping bar
-                .addTemporalMarker(()->{
-                    bar.setPos(bar.clip2 + 0.015);
-                    wrist.setPos(wrist.clip2);
-                    slides.setPos(slides.groundPos);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.820, () -> {
-                    claw.setPos(claw.OPENPOS);
-                })
-                        .setTangent(Math.toRadians(-90))
-                .waitSeconds(1)
+                    .setTangent(Math.toRadians(45))
                         .splineToSplineHeading(new Pose2d(36, -20, Math.toRadians(0)), Math.toRadians(90))
                         .setTangent(Math.toRadians(90))
                         .splineToSplineHeading(new Pose2d(47, -2, Math.toRadians(-90)), Math.toRadians(0))
                         .lineToConstantHeading(new Vector2d(47, -50))
                         .lineToConstantHeading(new Vector2d(47, -2))
                         .lineToConstantHeading(new Vector2d(60, -2))
-                        .lineToConstantHeading(new Vector2d(60, -50))
-                        .splineToConstantHeading(new Vector2d(23.5, -60), Math.toRadians(-90))
+                .lineToConstantHeading(new Vector2d(60, -50))
+                .lineToConstantHeading(new Vector2d(60, -2))
+                .lineToConstantHeading(new Vector2d(64, -2))
+                .lineToConstantHeading(new Vector2d(62, -50))
+                .lineToConstantHeading(new Vector2d(60, -40))
+                .waitSeconds(1)
+                .lineToConstantHeading(new Vector2d(60, -50))
 
                         .build();
         waitForStart();

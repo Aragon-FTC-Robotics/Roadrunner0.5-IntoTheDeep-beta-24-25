@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
 
-@TeleOp(name="what if the joker was red and yellow", group="Linear OpMode")
+@TeleOp(name="\uD83D\uDFE5RED/YELLOW opmode :O", group="Linear OpMode")
 public class FullTeleopRed extends LinearOpMode {
 
     public Bar bar = new Bar();

@@ -19,7 +19,7 @@ public class Flywheel {
                 gp2.stopRumble();
                 break;
             case OUT:
-                flywheel.setPower(-0.8);
+                flywheel.setPower(-0.6);
                 gp1.rumble(Gamepad.RUMBLE_DURATION_CONTINUOUS);
                 gp2.rumble(Gamepad.RUMBLE_DURATION_CONTINUOUS);
                 break;

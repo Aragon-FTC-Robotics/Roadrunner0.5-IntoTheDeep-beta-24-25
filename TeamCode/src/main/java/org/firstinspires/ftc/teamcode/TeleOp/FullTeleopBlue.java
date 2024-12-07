@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
 
-@TeleOp(name="what if the joker was Blue and yellow", group="Linear OpMode")
+@TeleOp(name="\uD83D\uDFE6BRUE/YELLOW opmode :O", group="Linear OpMode")
 public class FullTeleopBlue extends LinearOpMode {
 
     public Bar bar = new Bar();
@@ -85,6 +85,7 @@ public class FullTeleopBlue extends LinearOpMode {
             telemetry.addData("Baby", actionHandler.getBaby());
             telemetry.addData("state", actionHandler.getActionState());
             telemetry.addData("intake state", flywheel.getState());
+            telemetry.addData("rgb: ", "buhbubhub" + colorsensor.getColor()[0] + "bbbbbb" + colorsensor.getColor()[1] + "bbbbbujbhb" + colorsensor.getColor()[2]);
             if (looptime > highestTime) {
                 highestTime = looptime;
             }

@@ -124,6 +124,11 @@ public class ActionHandler {
             wrist.setState(Wrist.wristState.WALL);
             intakeWrist.setState(IntakeWrist.iwristState.OUT);
         }
+
+        if (gp1.x){
+            intakeWrist.setState(IntakeWrist.iwristState.IN);
+        }
+
         if (gp2.a) {
             claw.setState(Claw.ClawState.CLOSE);
             bar.setState(Bar.BarState.NEUTRAL);
