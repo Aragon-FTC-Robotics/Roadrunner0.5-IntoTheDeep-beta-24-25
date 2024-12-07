@@ -84,6 +84,7 @@ public class FullTeleopRed extends LinearOpMode {
             telemetry.addData("Highest loop time", highestTime);
             telemetry.addData("Baby", actionHandler.getBaby());
             telemetry.addData("state", actionHandler.getActionState());
+            telemetry.addData("intake state", flywheel.getState());
             if (looptime > highestTime) {
                 highestTime = looptime;
             }

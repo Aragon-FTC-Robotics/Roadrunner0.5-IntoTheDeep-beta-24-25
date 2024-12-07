@@ -69,6 +69,8 @@ public class ActionHandler {
         // Initiate transfer
         if (gp1.left_bumper) {
             startTransfer();
+            flywheel.setState(Flywheel.FlywheelDirection.STOP);
+            intaking = false;
         }
         if (gp2.left_stick_button && gp2.right_stick_button) {
             nudge();
@@ -79,6 +81,8 @@ public class ActionHandler {
             intakeWrist.setState(IntakeWrist.iwristState.IN);
         }
         if (gp1.left_trigger > 0.5) {
+            flywheel.setState(Flywheel.FlywheelDirection.STOP);
+            intaking = false;
             Hawk();
         }
         if (gp1.right_trigger > 0.5) {
@@ -107,6 +111,7 @@ public class ActionHandler {
         if (gp1.touchpad_finger_1 && gp1.touchpad_finger_2) {
             intakeWrist.setState(IntakeWrist.iwristState.IN);
             flywheel.setState(Flywheel.FlywheelDirection.STOP);
+            intaking = false;
             gp1.rumbleBlips(3);
             gp2.rumbleBlips(3);
         }
@@ -189,7 +194,7 @@ public class ActionHandler {
                 }
                 break;
             case SLIDESDOWN_STAGE_1:
-                if (elapsedMs >= 2000) {
+                if (elapsedMs >= 1000) {
                     extendo.setPos(extendo.min);
                     currentActionState = ActionState.IDLE;
                 }

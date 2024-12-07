@@ -67,6 +67,7 @@ public class Extendo {
     public double getExtendopos() {return extendoMotor.getCurrentPosition();}
     public void DANGEROUS_RESET_ENCODERS() {
         extendoMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        extendoMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         pos = min;
     }
 }
