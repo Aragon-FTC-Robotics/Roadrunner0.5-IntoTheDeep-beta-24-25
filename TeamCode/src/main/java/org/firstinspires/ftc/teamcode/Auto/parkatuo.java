@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="6+0 auto")
+@Autonomous(name="right side 6+0 auto (real) (actually park)")
 public class parkatuo extends LinearOpMode{
     SampleMecanumDrive drive;
     public void runOpMode() {

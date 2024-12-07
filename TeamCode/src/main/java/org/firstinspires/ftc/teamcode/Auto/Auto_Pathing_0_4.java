@@ -25,7 +25,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="5am auto guhhhhhhhhhh")
+@Autonomous(name="RIGHT SIDE 1+0")
 public class Auto_Pathing_0_4 extends LinearOpMode{
     SampleMecanumDrive drive;
     public void runOpMode() {

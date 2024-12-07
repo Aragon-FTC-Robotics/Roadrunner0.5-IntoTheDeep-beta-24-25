@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="1+0 with 15sec delaa7y")
+@Autonomous(name="LEFT SIDE 1+0, 15SEC DELAY")
 public class halfclip_withdelay extends LinearOpMode{
     SampleMecanumDrive drive;
     public void runOpMode() {
