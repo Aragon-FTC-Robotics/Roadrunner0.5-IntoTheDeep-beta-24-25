@@ -8,97 +8,107 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.TeleOp.ActionHandler;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Bar;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Claw;
-import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Colorsensor;
-import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Drivetrain;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Extendo;
-import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.IntakeWrist;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.SpecialExtendo;
-import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.SpecialSlides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="5am auto guhhhhhhhhhh")
+@Autonomous(name="4+0 Pathing")
 public class Auto_Pathing_0_4 extends LinearOpMode{
     SampleMecanumDrive drive;
+
     public void runOpMode() {
 
         drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = new Pose2d(23.5, -60, Math.toRadians(180));
+        Pose2d startPose = new Pose2d(23.5, -60, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
-        Bar bar = new Bar();
-        Claw claw = new Claw();
-        SpecialSlides slides = new SpecialSlides();
-        SpecialExtendo extendo = new SpecialExtendo();
-        IntakeWrist intakeWrist = new IntakeWrist();
-        Wrist wrist = new Wrist();
-        bar.init(hardwareMap);
-        claw.init(hardwareMap);
-        slides.init(hardwareMap);
-        extendo.init(hardwareMap);
-        intakeWrist.init(hardwareMap);
-        wrist.init(hardwareMap);
-        TrajectorySequence myTrajectory = drive.trajectorySequenceBuilder(startPose)
-                .addTemporalMarker(()->{
-                    //hello
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
-                    //hello2
-                })
-                .addTemporalMarker(()->{
-                    intakeWrist.setPos(intakeWrist.INPOS);
-                    bar.setPos(bar.wallpos);
-                    wrist.setPos(wrist.wall);
-                    claw.setPos(claw.CLOSEPOS);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
-                    bar.setPos(bar.clip1);
-                    wrist.setPos(wrist.clip1);
-                    slides.setPos(slides.medPos);
-                })
-                .waitSeconds(2)
-                .setTangent(Math.toRadians(135))
-                        .splineToSplineHeading(new Pose2d(0, -21.5, Math.toRadians(90)), Math.toRadians(90)) // To clipping bar
-                .addTemporalMarker(()->{
-                    bar.setPos(bar.clip2 + 0.1);
-                    wrist.setPos(wrist.clip2 - 0.310);
-                    slides.setPos(slides.groundPos);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.820, () -> {
-                    claw.setPos(claw.OPENPOS);
-                })
-                        .setTangent(Math.toRadians(-90))
-                .waitSeconds(1)
-                        .splineToSplineHeading(new Pose2d(36, -20, Math.toRadians(0)), Math.toRadians(90))
-                        .setTangent(Math.toRadians(90))
-                        .splineToSplineHeading(new Pose2d(47, -2, Math.toRadians(-90)), Math.toRadians(0))
-                        .lineToConstantHeading(new Vector2d(47, -50))
-                        .lineToConstantHeading(new Vector2d(47, -2))
-                        .lineToConstantHeading(new Vector2d(60, -2))
-                        .lineToConstantHeading(new Vector2d(60, -50))
-                        .splineToConstantHeading(new Vector2d(23.5, -60), Math.toRadians(-90))
 
-                        .build();
+
+        TrajectorySequence myTrajectory = drive.trajectorySequenceBuilder(startPose)
+                .addTemporalMarker(() -> {})
+
+                //got to clip
+                .lineToConstantHeading(new Vector2d(-5, -32))
+                .waitSeconds(1)
+
+                //clip #1
+
+                .setTangent(Math.toRadians(-65))
+                .splineToSplineHeading(new Pose2d(31, -41.4, Math.toRadians(45)),Math.toRadians(50)) //extendo to sample1
+
+                //extendo to sample #1
+
+                .waitSeconds(1)
+                //dump in observaiton
+                .lineToLinearHeading(new Pose2d(31,-41.41, Math.toRadians(-30)))
+                .waitSeconds(1)
+
+                //extendo to sample #2
+                .setTangent(Math.toRadians(15))
+                .splineToSplineHeading(new Pose2d(38.8, -36.8, Math.toRadians(40)),Math.toRadians(30)) //extnedo to saple2
+                .waitSeconds(1)
+                //dump in Observation
+                .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-50)))
+                .waitSeconds(1)
+
+                //extendo to sample #3
+                .setTangent(Math.toRadians(0))
+                .splineToSplineHeading(new Pose2d(38.8, -36.8, Math.toRadians(30)),Math.toRadians(25))
+                .waitSeconds(1)
+
+                //dump in Observation
+                .lineToLinearHeading(new Pose2d(39.01,-36.88, Math.toRadians(-50)))
+                .waitSeconds(1)
+
+                //go to wall to pick up clip #2
+                .setTangent(Math.toRadians(-100))
+                .lineToLinearHeading(new Pose2d(35, -56, Math.toRadians(-90)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(3,-32, Math.toRadians(90)))
+                //clipping
+                .waitSeconds(1)
+//                //go to wall to pick up clip #3
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//
+//                //move to clip
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
+//
+//
+//                //go to wall to pick up clip #3
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//                .waitSeconds(1)
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
+//
+//                //go to wall to pick up clip #4
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//                .waitSeconds(1)
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
+//                //go to wall to pick up clip #5
+//                .lineToConstantHeading(new Vector2d(35,-57))
+//                .waitSeconds(1)
+//                .lineToConstantHeading(new Vector2d(5, -39))
+//                //clipping
+//                .waitSeconds(1)
+
+                //park @ observation
+                .lineToLinearHeading(new Pose2d(35, -60, Math.toRadians(90)))
+                .build();
         waitForStart();
 
         if(isStopRequested()) return;
 
         drive.followTrajectorySequence(myTrajectory);
-        int i = 0;
-        while (!isStopRequested()) {
-            slides.loop();
-            extendo.Loop();
-            i++;
-            telemetry.addData("i", i);
-            telemetry.update();
-        }
     }
 
 }
