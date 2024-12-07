@@ -15,6 +15,8 @@ public class Flywheel {
         switch (currentFlywheelState) {
             case IN:
                 flywheel.setPower(0.8);
+                gp1.stopRumble();
+                gp2.stopRumble();
                 break;
             case OUT:
                 flywheel.setPower(-0.8);

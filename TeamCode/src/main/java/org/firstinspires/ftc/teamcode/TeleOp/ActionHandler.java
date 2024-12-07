@@ -27,6 +27,7 @@ public class ActionHandler {
         TRANSFER_STAGE_2, //flywheel out
         TRANSFER_STAGE_3, //barwrist transfer, flywheel stop
         TRANSFER_STAGE_4, //clawopen
+        TRANSFER_STAGE_5,
         CLIP2_STAGE_1, //delay to wrist move
         CLIP2_STAGE_2, //delay to claw open
         HIGHBUCKET_STAGE_1, //slides up BEFORE
@@ -38,7 +39,8 @@ public class ActionHandler {
         EJECT_STAGE_1,
         TUAH_STAGE_1, //flywehl out
         TUAH_STAGE_2, //wheel STOP
-        RESETSTATE
+        RESETSTATE,
+        NUDGE1, NUDGE2, NUDGE3
     }
 
     public void init(Slides s, Extendo e, Bar b, Wrist w, Flywheel f, Claw c, IntakeWrist iw, Colorsensor cs, String alliance) {
@@ -68,6 +70,9 @@ public class ActionHandler {
         if (gp1.left_bumper) {
             startTransfer();
         }
+        if (gp2.left_stick_button && gp2.right_stick_button) {
+            nudge();
+        }
 
         // Intake wrist out
         if (gp1.right_bumper) {
@@ -87,7 +92,6 @@ public class ActionHandler {
         if (gp1.dpad_down) {
             resetExtendo();
         }
-
         // Reset slides and arm
         if (gp2.dpad_down) {
             startSlidesDown();
@@ -118,6 +122,7 @@ public class ActionHandler {
             bar.setState(Bar.BarState.NEUTRAL);
             wrist.setState(Wrist.wristState.TRANSFER);
         }
+
     }
 
     private void handleTimedActions() {
@@ -150,6 +155,13 @@ public class ActionHandler {
             case TRANSFER_STAGE_4:
                 if (elapsedMs >= 250) {
                     claw.setState(Claw.ClawState.OPEN);
+                    currentActionState = ActionState.TRANSFER_STAGE_5;
+                    timer.reset();
+                }
+                break;
+            case TRANSFER_STAGE_5:
+                if (elapsedMs >= 500) {
+                    bar.setState(Bar.BarState.NEUTRAL);
                     currentActionState = ActionState.IDLE;
                 }
                 break;
@@ -209,6 +221,27 @@ public class ActionHandler {
                 break;
             default:
                 currentActionState = ActionState.IDLE;
+                break;
+            case NUDGE1:
+                if (elapsedMs >= 100) {
+                    bar.setState(Bar.BarState.TRANSFER);
+                    currentActionState = ActionState.NUDGE2;
+                    timer.reset();
+                }
+                break;
+            case NUDGE2:
+                if (elapsedMs >= 100) {
+                    bar.setState(Bar.BarState.NEUTRAL);
+                    currentActionState = ActionState.NUDGE3;
+                    timer.reset();
+                }
+                break;
+            case NUDGE3:
+                if (elapsedMs >= 100) {
+                    bar.setState(Bar.BarState.TRANSFER);
+                    currentActionState = ActionState.IDLE;
+                    timer.reset();
+                }
                 break;
         }
     }
@@ -298,6 +331,12 @@ public class ActionHandler {
     private void resetExtendo() {
         extendo.setPos(-700);
         currentActionState = ActionState.RESETSTATE;
+        timer.reset();
+    }
+    private void nudge() {
+        bar.setState(Bar.BarState.NEUTRAL);
+        wrist.setState(Wrist.wristState.TRANSFER);
+        currentActionState = ActionState.NUDGE1;
         timer.reset();
     }
 

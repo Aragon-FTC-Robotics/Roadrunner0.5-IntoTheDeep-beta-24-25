@@ -36,17 +36,17 @@ public class Drivetrain {
 
     public void Loop(Gamepad gp1, Gamepad gp2){
 
-        double MICROSPEED = 0.1;
+        double MICROSPEED = 0.3;
         double y = gp1.left_stick_y; // Remember, Y stick value is reversed
         double x = -gp1.left_stick_x * 1.1; // Counteract imperfect strafing
         double rx = -gp1.right_stick_x * 0.8;
 
-        if (gp1.dpad_up) {
-            x = 0; y = -MICROSPEED;
-        }
-        if (gp1.dpad_down) {
-            x = 0; y = MICROSPEED;
-        }
+//        if (gp1.dpad_up) {
+//            x = 0; y = -MICROSPEED;
+//        }
+//        if (gp1.dpad_down) {
+//            x = 0; y = MICROSPEED;
+//        }
         if (gp1.dpad_right) {
             x = MICROSPEED; y = 0;
         }
