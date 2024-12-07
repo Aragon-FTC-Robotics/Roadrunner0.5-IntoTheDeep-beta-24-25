@@ -33,7 +33,7 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
                 .addTemporalMarker(() -> {})
 
                 //got to clip
-                .lineToConstantHeading(new Vector2d(-5, -34))
+                .lineToConstantHeading(new Vector2d(-5, -32))
                 .waitSeconds(1)
 
                 //clip #1
@@ -67,9 +67,9 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
 
                 //go to wall to pick up clip #2
                 .setTangent(Math.toRadians(-100))
-                .lineToLinearHeading(new Pose2d(35, -57, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(35, -56, Math.toRadians(-90)))
                 .waitSeconds(1)
-                .lineToLinearHeading(new Pose2d(5,-39, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(3,-32, Math.toRadians(90)))
                 //clipping
                 .waitSeconds(1)
 //                //go to wall to pick up clip #3
