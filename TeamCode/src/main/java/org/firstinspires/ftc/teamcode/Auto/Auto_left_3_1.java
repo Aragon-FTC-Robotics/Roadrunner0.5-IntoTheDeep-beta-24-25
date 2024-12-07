@@ -194,6 +194,10 @@ public class Auto_left_3_1 extends LinearOpMode {
                 .build();
         waitForStart();
 
+        if(isStopRequested()) return;
+
+        drive.followTrajectorySequence(myTrajectory);
+
     }
     private void transfer() {
         //transfer, ciopy pasted from when we have a robot.  guh

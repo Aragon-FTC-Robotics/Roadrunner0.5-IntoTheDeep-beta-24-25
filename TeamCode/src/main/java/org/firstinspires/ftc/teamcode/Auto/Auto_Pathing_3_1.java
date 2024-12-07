@@ -29,7 +29,7 @@ public class Auto_Pathing_3_1 extends LinearOpMode {
                 //clip #1
 
                 //move to intake yellow #1
-                .lineToLinearHeading(new Pose2d(-37, -34, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-37, -34, Math.toRadians(180))) //
                 .lineToConstantHeading(new Vector2d(-34, -24))
                 //collect sample#1
                 .waitSeconds(1)
@@ -60,5 +60,10 @@ public class Auto_Pathing_3_1 extends LinearOpMode {
                 //park on observation
                 .lineToSplineHeading(new Pose2d(35, -60, Math.toRadians(90)))
                 .build();
+        waitForStart();
+
+        if(isStopRequested()) return;
+
+        drive.followTrajectorySequence(myTrajectory);
     }
 }

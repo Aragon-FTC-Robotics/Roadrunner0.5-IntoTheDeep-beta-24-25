@@ -104,6 +104,11 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
                 //park @ observation
                 .lineToSplineHeading(new Pose2d(35, -60, Math.toRadians(90)))
                 .build();
+        waitForStart();
 
+        if(isStopRequested()) return;
+
+        drive.followTrajectorySequence(myTrajectory);
     }
+
 }

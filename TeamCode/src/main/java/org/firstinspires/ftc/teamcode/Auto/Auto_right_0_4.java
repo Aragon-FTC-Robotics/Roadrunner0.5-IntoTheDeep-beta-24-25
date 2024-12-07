@@ -231,5 +231,9 @@ public class Auto_right_0_4 extends LinearOpMode {
                 .build();
         waitForStart();
 
+        if(isStopRequested()) return;
+
+        drive.followTrajectorySequence(myTrajectory);
+
     }
 }
