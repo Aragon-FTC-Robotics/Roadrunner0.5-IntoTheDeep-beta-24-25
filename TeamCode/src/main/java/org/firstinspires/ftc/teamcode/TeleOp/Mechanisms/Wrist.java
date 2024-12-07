@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Wrist {
     Servo wrist;
-    public final double transfer = 0.090;
+    public final double transfer = 0.070;
     public final double bucket = 1.000;
     public final double wall = 0.472;
     public final double clip1 = 0.347;
@@ -48,6 +48,9 @@ public class Wrist {
 
     public void setState(wristState state) {
         currentWristState = state;
+    }
+    public void setPos(double pos) {
+        wrist.setPosition(pos);
     }
 
     public void wristPos(double pos){

@@ -40,6 +40,9 @@ public class Claw {
         double openPos = OPENPOS;
         claw1.setPosition(openPos);
     }
+    public void setPos(double pos) {
+        claw1.setPosition(pos);
+    }
     private void closePosition() {
         double closePos = CLOSEPOS;
         claw1.setPosition(closePos);

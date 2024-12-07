@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Bar;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Claw;
@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.IntakeWrist;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.TeleOp.Mechanisms.Wrist;
 
-@Disabled
+
 @TeleOp(name="what if the joker was Blue and yellow", group="Linear OpMode")
 public class FullTeleopBlue extends LinearOpMode {
 
@@ -29,10 +29,11 @@ public class FullTeleopBlue extends LinearOpMode {
     public IntakeWrist intakeWrist = new IntakeWrist();
     public Wrist wrist = new Wrist();
     public ActionHandler actionHandler = new ActionHandler();
-
+    public ElapsedTime timer = new ElapsedTime();
     public Gamepad gp1;
     public Gamepad gp2;
-
+    double looptime = 0.000;
+    double highestTime = 0.000;
     @Override
     public void waitForStart() {
         super.waitForStart();
@@ -50,28 +51,45 @@ public class FullTeleopBlue extends LinearOpMode {
         slides.init(hardwareMap);
         wrist.init(hardwareMap);
         actionHandler.init(slides,extendo,bar,wrist,flywheel,claw,intakeWrist,colorsensor, "blue");
+        timer.reset();
 
         gp1 = gamepad1;
         gp2 = gamepad2;
 
         waitForStart();
-
+        timer.reset();
+        highestTime = 0.000;
         while(opModeIsActive() && !isStopRequested()) {
+            looptime = timer.milliseconds();
             bar.Loop(gp1, gp2);
+            colorsensor.Loop(gp1, gp2);
             claw.Loop(gp1, gp2);
             drivetrain.Loop(gp1, gp2);
             extendo.Loop(gp1, gp2);
             flywheel.Loop(gp1, gp2);
             intakeWrist.Loop(gp1, gp2);
-            slides.Loop(gp1, gp2);
+            slides.Loop();
             wrist.Loop(gp1, gp2);
             actionHandler.Loop(gp1, gp2);
-            telemetry.addData("barposL", bar.getPos());
-            telemetry.addData("Extendopos1", extendo.getPos());
-            telemetry.addData("Extendopos2", extendo.getExtendopos());
+            telemetry.addData("Last Commanded Bar Pos", bar.getPos());
+            telemetry.addData("BARSTATE:    ", bar.getBarState());
+            telemetry.addData("Extendo intpos", extendo.getPos());
+            telemetry.addData("Extendo encoder pos", extendo.getExtendopos());
             telemetry.addData("slideLpos", slides.getLPos());
             telemetry.addData("slideRpos", slides.getRPos());
+            telemetry.addData("is REd?", colorsensor.sensorIsRed());
+            telemetry.addData("is brue?", colorsensor.sensorIsBlue());
+            telemetry.addData("is yelo?", colorsensor.sensorIsYellow());
+            telemetry.addData("Looptime", looptime);
+            telemetry.addData("Highest loop time", highestTime);
+            telemetry.addData("Baby", actionHandler.getBaby());
+            telemetry.addData("state", actionHandler.getActionState());
+            telemetry.addData("intake state", flywheel.getState());
+            if (looptime > highestTime) {
+                highestTime = looptime;
+            }
             telemetry.update();
+            timer.reset();
         }
     }
 }

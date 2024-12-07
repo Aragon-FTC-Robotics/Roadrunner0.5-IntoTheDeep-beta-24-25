@@ -32,7 +32,9 @@ public class IntakeWrist {
                 break;
         }
     }
-
+    public void setPos(double pos) {
+        iWrist.setPosition(pos);
+    }
     public void setState(iwristState state) {
         currentiWrist = state;
     }

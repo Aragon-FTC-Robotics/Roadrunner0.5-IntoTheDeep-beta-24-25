@@ -103,6 +103,7 @@ public class ActionHandler {
 
         if (gp2.x) {
             Clip1();
+            intakeWrist.setState(IntakeWrist.iwristState.IN);
         }
 
         if (gp2.y) {
@@ -121,6 +122,7 @@ public class ActionHandler {
             claw.setState(Claw.ClawState.OPEN);
             bar.setState(Bar.BarState.WALL);
             wrist.setState(Wrist.wristState.WALL);
+            intakeWrist.setState(IntakeWrist.iwristState.OUT);
         }
         if (gp2.a) {
             claw.setState(Claw.ClawState.CLOSE);
@@ -149,7 +151,7 @@ public class ActionHandler {
                 }
                 break;
             case TRANSFER_STAGE_3:
-                if (elapsedMs >= 500) {
+                if (elapsedMs >= 1000) {
                     flywheel.setState(Flywheel.FlywheelDirection.STOP);
                     bar.setState(Bar.BarState.TRANSFER);
                     wrist.setState(Wrist.wristState.TRANSFER);

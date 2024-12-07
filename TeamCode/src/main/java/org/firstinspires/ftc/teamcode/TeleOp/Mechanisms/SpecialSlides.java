@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Slides {
+public class SpecialSlides {
     private PIDController controller;
     public static double p=0.0055, i=0, d=0.0001;
     public static double f=0;
@@ -17,9 +17,9 @@ public class Slides {
 
     public final int groundPos = -30;
     public final int lowPos = 200;
-    public final int medPos = 1200;
+    public final int medPos = 1400;
     public final int highPos = 2600;
-    public int target = 0;
+    public int target = -30;
     double armPos, power, pid;
     public enum slideState {GROUND, CLIP, MED, HIGH}
 
@@ -34,39 +34,21 @@ public class Slides {
 
         slideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slideLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        slideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        slideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         setState(slideState.GROUND);
     }
 
-    public void Loop() {
-        controller.setPID(p,i,d);
-        pid = controller.calculate(slideLeft.getCurrentPosition(), target);
-//        double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
-        double ff = 0;
-        power = pid + ff;
-        switch(currentSlideState) {
-            case GROUND:
-                slidePosition(power, groundPos);
-                break;
-            case CLIP:
-                slidePosition(power, lowPos);
-                break;
-            case MED:
-                slidePosition(power, medPos);
-                break;
-            case HIGH:
-                slidePosition(power, highPos);
-                break;
-            default:
-                slidePosition(power, groundPos);
-                break;
-        }
+    public void loop() {
+        power = 0.85;
+        slidePosition(power, target);
     }
     public void setState(slideState state) {
         currentSlideState = state;
     }
-
+    public void setPos(int pos) {
+        slidePosition(0.85, pos);
+    }
     public void slidePosition(double power, int pos) {
         slideLeft.setTargetPosition(pos);
         slideRight.setTargetPosition(pos);
@@ -74,6 +56,8 @@ public class Slides {
 
         slideLeft.setPower(power);
         slideRight.setPower(power);
+        slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 //        slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);

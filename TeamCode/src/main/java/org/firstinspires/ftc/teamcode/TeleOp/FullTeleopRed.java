@@ -68,7 +68,7 @@ public class FullTeleopRed extends LinearOpMode {
             extendo.Loop(gp1, gp2);
             flywheel.Loop(gp1, gp2);
             intakeWrist.Loop(gp1, gp2);
-            slides.Loop(gp1, gp2);
+            slides.Loop();
             wrist.Loop(gp1, gp2);
             actionHandler.Loop(gp1, gp2);
             telemetry.addData("Last Commanded Bar Pos", bar.getPos());
