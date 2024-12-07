@@ -67,8 +67,8 @@ public class Auto_Pathing_0_4 extends LinearOpMode{
                 .setTangent(Math.toRadians(135))
                         .splineToSplineHeading(new Pose2d(0, -21.5, Math.toRadians(90)), Math.toRadians(90)) // To clipping bar
                 .addTemporalMarker(()->{
-                    bar.setPos(bar.clip2 + 0.1);
-                    wrist.setPos(wrist.clip2 - 0.310);
+                    bar.setPos(bar.clip2 + 0.015);
+                    wrist.setPos(wrist.clip2);
                     slides.setPos(slides.groundPos);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.820, () -> {
