@@ -6,11 +6,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Wrist {
     Servo wrist;
-    public final double transfer = 0.070;
+    public final double transfer = 0.078;
     public final double bucket = 1.000;
-    public final double wall = 0.472;
-    public final double clip1 = 0.273;
-    public final double clip2 = 0.273;
+    public final double wall = 0.464;
+    public final double clip1 = 0.332;
+    public final double clip2 = 0.332;
     public final double EJECT = 1.000;
     double speed;
 

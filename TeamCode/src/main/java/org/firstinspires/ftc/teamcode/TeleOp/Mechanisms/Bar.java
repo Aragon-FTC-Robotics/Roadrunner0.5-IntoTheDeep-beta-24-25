@@ -13,12 +13,12 @@ public class Bar {
 
     public enum BarState {TRANSFER, WALL, BUCKET, CLIP2, CLIP1, NEUTRAL, EJECT}
     double pos;
-    public double transferpos = 0.874;
-    public double wallpos = 0.817;
-    public double bucketpos = 0.264;
-    public double clip2 = 0.441;
-    public double clip1 = 0.441;
-    public double neutralpos = 0.718;
+    public double transferpos = 0.818;
+    public double wallpos = 0.864;
+    public double bucketpos = 0.262;
+    public double clip2 = 0.403;
+    public double clip1 = 0.403;
+    public double neutralpos = 0.723;
     final double EJECT = 0.000;
     BarState currentBarState;
 

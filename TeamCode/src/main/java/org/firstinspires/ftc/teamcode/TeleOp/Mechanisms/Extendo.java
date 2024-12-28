@@ -15,7 +15,7 @@ public class Extendo {
     double pos;
     double speed = 15;
     double pid, power;
-    public final int max = 600; //580 mm extendo
+    public final int max = 2000; //580 mm extendo
     public final int min = -200;
     public final int MED = 300;
     public final int mid = (int)Math.round((max+min)*0.5);
