@@ -9,7 +9,7 @@ public class Flywheel {
     public enum FlywheelDirection {IN, OUT, STOP};
     FlywheelDirection currentFlywheelState = FlywheelDirection.STOP;
     public void init(HardwareMap hm) {
-        flywheel = hm.get(DcMotor.class, "flywheel");
+        flywheel = hm.get(DcMotor.class, "intake");
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
         switch (currentFlywheelState) {

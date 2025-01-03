@@ -12,7 +12,7 @@ public class IntakeWrist {
     public final double OUTPOS = 0.890;
     public final double SUPEROUTPOS = 0.715;
     public void init(HardwareMap hm) {
-        iWrist = hm.get(Servo.class, "iWrist");
+        iWrist = hm.get(Servo.class, "intakeWrist");
         currentiWrist = iwristState.SUPEROUT;
     }
 

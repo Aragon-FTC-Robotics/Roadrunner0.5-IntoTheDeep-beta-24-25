@@ -24,7 +24,7 @@ public class Bar {
 
     public void init(HardwareMap hm) {
     //    barServoLeft = hm.get(Servo.class, "barLeft");
-        barServoRight = hm.get(Servo.class, "barRight");
+        barServoRight = hm.get(Servo.class, "bar");
         barServoRight.setDirection(Servo.Direction.REVERSE);
     //    barServoLeft.setDirection(Servo.Direction.FORWARD);
         currentBarState = BarState.NEUTRAL;

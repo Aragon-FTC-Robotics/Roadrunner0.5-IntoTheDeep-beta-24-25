@@ -12,7 +12,7 @@ public class Claw {
     public enum ClawState {CLOSE, OPEN, SUPEROPEN}
     ClawState currentClawState;
     public void init(HardwareMap hm) {
-        claw1 = hm.get(Servo.class, "claw1");
+        claw1 = hm.get(Servo.class, "claw");
         currentClawState = ClawState.CLOSE;
     }
     public void Loop(Gamepad gp1, Gamepad gp2) {
